@@ -26,7 +26,8 @@ public class MEItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         basicItem(MEItems.MINIUM_SHARD.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
-        basicItem(MEItems.ALCHEMY_BAG.get());
+        basicItem(MEItems.ALCHEMY_BAG.get())
+                .texture("layer1", modLoc("item/alchemy_bag_overlay"));
         destructionCatalystItem(MEItems.DESTRUCTION_CATALYST.get());
 
         blockItems();

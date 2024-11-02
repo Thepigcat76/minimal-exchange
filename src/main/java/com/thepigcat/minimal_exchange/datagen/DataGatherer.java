@@ -3,6 +3,7 @@ package com.thepigcat.minimal_exchange.datagen;
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.datagen.assets.EnUSLangProvider;
 import com.thepigcat.minimal_exchange.datagen.assets.MEItemModelProvider;
+import com.thepigcat.minimal_exchange.datagen.data.DataMapProvider;
 import com.thepigcat.minimal_exchange.datagen.data.RecipeProvider;
 import com.thepigcat.minimal_exchange.datagen.data.TagProvider;
 import net.minecraft.core.HolderLookup;
@@ -30,6 +31,7 @@ public class DataGatherer {
 
         TagProvider.createTagProviders(generator, packOutput, lookupProvider, existingFileHelper, event.includeServer());
         generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new DataMapProvider(packOutput, lookupProvider));
 //        generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(), List.of(
 //                new LootTableProvider.SubProviderEntry(BlockLootTableProvider::new, LootContextParamSets.BLOCK)
 //        ), lookupProvider));

@@ -1,0 +1,29 @@
+{
+  "values": {
+    "minimal_exchange:transmutation_stone": {
+      "definitions": {
+        "D": {
+          "tag": "c:gems/diamond"
+        },
+        "S": {
+          "item": "minimal_exchange:minium_shard"
+        }
+      },
+      "pattern": [
+        "SSS",
+        "SDS",
+        "SSS"
+      ],
+      "result": {
+        "count": 1,
+        "id": "minimal_exchange:transmutation_stone",
+        "components": {
+          "minimal_exchange:matter": {
+            "matter": 100,
+            "matterCapacity": 100
+          }
+        }
+      }
+    }
+  }
+}

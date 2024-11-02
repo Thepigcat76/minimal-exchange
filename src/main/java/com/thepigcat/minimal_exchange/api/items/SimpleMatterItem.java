@@ -1,19 +1,24 @@
-package com.thepigcat.minimal_exchange.content.items;
+package com.thepigcat.minimal_exchange.api.items;
 
 import com.thepigcat.minimal_exchange.data.MECapabilities;
 import com.thepigcat.minimal_exchange.data.capabilities.IMatterStorage;
+import net.minecraft.ChatFormatting;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 
-public abstract class SimpleMatterItem extends Item implements IMatterItem{
+import java.util.List;
+
+public abstract class SimpleMatterItem extends Item implements IMatterItem {
     public SimpleMatterItem(Properties properties) {
         super(properties);
     }
 
     @Override
     public int getBarColor(ItemStack stack) {
-        return FastColor.ARGB32.color(227, 167, 43);
+        return FastColor.ARGB32.color(237, 183, 72);
     }
 
     @Override
@@ -29,5 +34,13 @@ public abstract class SimpleMatterItem extends Item implements IMatterItem{
     private static int matterForDurabilityBar(ItemStack itemStack) {
         IMatterStorage matterStorage = itemStack.getCapability(MECapabilities.MatterStorage.ITEM);
         return Math.round(13.0F - ((1 - ((float) matterStorage.getMatter() / matterStorage.getMatterCapacity())) * 13.0F));
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        IMatterStorage matterComponent = stack.getCapability(MECapabilities.MatterStorage.ITEM);
+        tooltipComponents.add(Component.translatable("tooltip.minimal_exchange.matter_stored", matterComponent.getMatter(), matterComponent.getMatterCapacity())
+                .withColor(getBarColor(stack)));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

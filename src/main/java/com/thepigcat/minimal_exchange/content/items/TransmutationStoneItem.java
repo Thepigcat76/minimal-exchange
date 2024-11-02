@@ -1,13 +1,12 @@
 package com.thepigcat.minimal_exchange.content.items;
 
-import com.thepigcat.minimal_exchange.MinimalExchange;
+import com.thepigcat.minimal_exchange.api.items.SimpleMatterItem;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.registries.MESoundEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;

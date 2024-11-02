@@ -1,15 +1,15 @@
 package com.thepigcat.minimal_exchange.datagen.data;
 
+import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.content.items.TransmutationStoneItem;
+import com.thepigcat.minimal_exchange.content.recipes.SpecialRecipes;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
 import com.thepigcat.minimal_exchange.registries.MEItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -28,17 +28,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
     @Override
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
-        ItemStack transmutationStone = MEItems.TRANSMUTATION_STONE.toStack();
-        MatterComponent matterComponent = transmutationStone.get(MEDataComponents.MATTER);
-        transmutationStone.set(MEDataComponents.MATTER, new MatterComponent(matterComponent.getMatterCapacity(), matterComponent.getMatterCapacity()));
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, transmutationStone)
-                .pattern("SSS")
-                .pattern("SDS")
-                .pattern("SSS")
-                .define('S', MEItems.MINIUM_SHARD.get())
-                .define('D', Tags.Items.GEMS_DIAMOND)
-                .unlockedBy("has_shard", has(MEItems.MINIUM_SHARD.get()))
-                .save(recipeOutput);
+        SpecialRecipeBuilder.special(SpecialRecipes::new)
+                        .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutation_stone"));
 
         transmutationRecipe(recipeOutput, Tags.Items.OBSIDIANS, 4, Items.IRON_INGOT);
         transmutationRecipe(recipeOutput, Tags.Items.INGOTS_IRON, 4, Items.ENDER_PEARL);

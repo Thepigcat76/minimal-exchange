@@ -14,5 +14,9 @@ public class EnUSLangProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(MEItems.MINIUM_SHARD, "Minium Shard");
         addItem(MEItems.TRANSMUTATION_STONE, "Transmutation Stone");
+        addItem(MEItems.DESTRUCTION_CATALYST, "Destruction Catalyst");
+        addItem(MEItems.ALCHEMY_BAG, "Alchemy Bag");
+        add("tooltip.minimal_exchange.matter_stored", "Matter Stored: %d/%d");
+        add("itemGroup.minimal_exchange.me_tab", "Minimal Exchange");
     }
 }

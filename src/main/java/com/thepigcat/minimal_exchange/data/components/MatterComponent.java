@@ -1,28 +1,23 @@
 package com.thepigcat.minimal_exchange.data.components;
 
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.thepigcat.minimal_exchange.data.capabilities.IMatterStorage;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 
 import java.util.Objects;
 
-public record MatterComponent(int matter, int matterCapacity) implements IMatterStorage {
-    public static final MatterComponent EMPTY = new MatterComponent(0, 0);
+public class MatterComponent implements IMatterStorage {
+    public static final MatterComponent EMPTY = new MatterComponent(0);
 
-    public static final Codec<MatterComponent> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-            Codec.INT.fieldOf("matter").forGetter(MatterComponent::matter),
-            Codec.INT.fieldOf("matterCapacity").forGetter(MatterComponent::matterCapacity)
-    ).apply(builder, MatterComponent::new));
-    public static final StreamCodec<RegistryFriendlyByteBuf, MatterComponent> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.INT,
-            MatterComponent::matter,
-            ByteBufCodecs.INT,
-            MatterComponent::matterCapacity,
-            MatterComponent::new
-    );
+    public static final Codec<MatterComponent> CODEC = Codec.INT.xmap(MatterComponent::new, MatterComponent::matter);
+    public static final StreamCodec<ByteBuf, MatterComponent> STREAM_CODEC = ByteBufCodecs.INT.map(MatterComponent::new, MatterComponent::matter);
+    private final int matter;
+
+    public MatterComponent(int matter) {
+        this.matter = matter;
+    }
 
     @Override
     public int getMatter() {
@@ -31,18 +26,29 @@ public record MatterComponent(int matter, int matterCapacity) implements IMatter
 
     @Override
     public int getMatterCapacity() {
-        return matterCapacity;
+        return 0;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof MatterComponent that)) return false;
-        return matter == that.matter && matterCapacity == that.matterCapacity;
+        return matter == that.matter;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(matter, matterCapacity);
+        return Objects.hashCode(matter);
     }
+
+    public int matter() {
+        return matter;
+    }
+
+    @Override
+    public String toString() {
+        return "MatterComponent[" +
+                "matter=" + matter + ']';
+    }
+
 }
