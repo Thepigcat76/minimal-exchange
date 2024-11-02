@@ -1,0 +1,9 @@
+// 1.21.1	2024-11-01T19:52:34.418008787	Recipes
+026f8141afb947ce5d692d0be6e9c8c719d10960 data/minecraft/advancement/recipes/misc/ender_pearl.json
+5f4c7bc0accfec202b9f983948e230ef8d1cd0e5 data/minecraft/advancement/recipes/misc/gold_ingot.json
+7f15cba926c35d58ea2f4c2f59f736dd04a231da data/minecraft/advancement/recipes/misc/iron_ingot.json
+b0df0c55e5540779558781754b192758aebfa937 data/minecraft/recipe/ender_pearl.json
+51887e7d0cdc5e5c5bb922cfd941f43d5e47165d data/minecraft/recipe/gold_ingot.json
+d14f65247b2759510814ea991a60f39b49bd2558 data/minecraft/recipe/iron_ingot.json
+061b2fe3ae205530ea8463540d91075065f3fed5 data/minimal_exchange/advancement/recipes/tools/transmutation_stone.json
+24a3c67b658ad47a27a029a4ffdada0517c54a01 data/minimal_exchange/recipe/transmutation_stone.json
