@@ -1,0 +1,9 @@
+{
+  "transmute": {
+    "category": "players",
+    "subtitle": "minimal_exchange.transmute",
+    "sounds": [
+      "minimal_exchange:transmute"
+    ]
+  }
+}
