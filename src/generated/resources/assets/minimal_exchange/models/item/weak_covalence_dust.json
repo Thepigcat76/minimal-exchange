@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minimal_exchange:item/weak_covalence_dust"
+  }
+}

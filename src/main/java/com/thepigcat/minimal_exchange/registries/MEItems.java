@@ -29,6 +29,10 @@ public final class MEItems {
 
     public static final DeferredItem<Item> MINIUM_SHARD = register("minium_shard",
             () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> WEAK_COVALENCE_DUST = register("weak_covalence_dust",
+            () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> STRONG_COVALENCE_DUST = register("strong_covalence_dust",
+            () -> new Item(new Item.Properties()));
     public static final DeferredItem<TransmutationStoneItem> TRANSMUTATION_STONE = register("transmutation_stone",
             () -> new TransmutationStoneItem(new Item.Properties()
                     .component(MEDataComponents.MATTER, new MatterComponent(3000, 3000))

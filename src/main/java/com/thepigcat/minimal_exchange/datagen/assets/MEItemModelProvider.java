@@ -24,6 +24,8 @@ public class MEItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        basicItem(MEItems.WEAK_COVALENCE_DUST.get());
+        basicItem(MEItems.STRONG_COVALENCE_DUST.get());
         basicItem(MEItems.MINIUM_SHARD.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
         basicItem(MEItems.ALCHEMY_BAG.get())

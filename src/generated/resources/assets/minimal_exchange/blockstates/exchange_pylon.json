@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "minimal_exchange:block/exchange_pylon"
+    }
+  }
+}

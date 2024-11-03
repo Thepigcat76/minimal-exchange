@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "F": {
+      "item": "minecraft:fire_charge"
+    },
+    "M": {
+      "item": "minimal_exchange:minium_shard"
+    },
+    "S": {
+      "item": "minimal_exchange:strong_covalence_dust"
+    },
+    "W": {
+      "item": "minimal_exchange:weak_covalence_dust"
+    }
+  },
+  "pattern": [
+    "WMS",
+    "MFM",
+    "SMW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minimal_exchange:destruction_catalyst"
+  }
+}

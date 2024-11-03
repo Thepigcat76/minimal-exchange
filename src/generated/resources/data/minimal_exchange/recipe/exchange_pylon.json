@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "O": {
+      "tag": "c:obsidians"
+    },
+    "S": {
+      "item": "minimal_exchange:strong_covalence_dust"
+    },
+    "W": {
+      "item": "minimal_exchange:weak_covalence_dust"
+    }
+  },
+  "pattern": [
+    " O ",
+    " S ",
+    "OWO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minimal_exchange:exchange_pylon"
+  }
+}

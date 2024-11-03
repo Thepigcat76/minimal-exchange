@@ -1,0 +1,11 @@
+{
+  "values": {
+    "minecraft:iron_ingot": {
+      "inputCount": 4,
+      "result": {
+        "count": 1,
+        "id": "minecraft:ender_pearl"
+      }
+    }
+  }
+}

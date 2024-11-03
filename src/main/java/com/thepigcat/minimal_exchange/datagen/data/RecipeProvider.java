@@ -2,11 +2,13 @@ package com.thepigcat.minimal_exchange.datagen.data;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.content.recipes.ItemTransmutationRecipe;
+import com.thepigcat.minimal_exchange.registries.MEBlocks;
 import com.thepigcat.minimal_exchange.registries.MEItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -32,30 +34,51 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_shard", has(MEItems.MINIUM_SHARD.get()))
                 .save(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MEItems.DESTRUCTION_CATALYST)
+                .pattern("WMS")
+                .pattern("MFM")
+                .pattern("SMW")
+                .define('W', MEItems.WEAK_COVALENCE_DUST.get())
+                .define('S', MEItems.STRONG_COVALENCE_DUST.get())
+                .define('M', MEItems.MINIUM_SHARD)
+                .define('F', Items.FIRE_CHARGE)
+                .unlockedBy("has_shard", has(MEItems.MINIUM_SHARD.get()))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MEBlocks.EXCHANGE_PYLON)
+                .pattern(" O ")
+                .pattern(" S ")
+                .pattern("OWO")
+                .define('S', MEItems.STRONG_COVALENCE_DUST.get())
+                .define('W', MEItems.WEAK_COVALENCE_DUST.get())
+                .define('O', Tags.Items.OBSIDIANS)
+                .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MEItems.WEAK_COVALENCE_DUST)
+                .requires(Tags.Items.DUSTS_REDSTONE)
+                .requires(Tags.Items.INGOTS_IRON)
+                .unlockedBy("has_redstone", has(Tags.Items.DUSTS_REDSTONE))
+                .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MEItems.STRONG_COVALENCE_DUST)
+                .requires(Tags.Items.DUSTS_GLOWSTONE)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .unlockedBy("has_glowstone", has(Tags.Items.DUSTS_GLOWSTONE))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MEItems.ALCHEMY_BAG)
+                .pattern(" S ")
+                .pattern("WCW")
+                .pattern("WWW")
+                .define('S', Tags.Items.STRINGS)
+                .define('W', ItemTags.WOOL)
+                .define('C', MEItems.WEAK_COVALENCE_DUST.get())
+                .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
+                .save(recipeOutput);
+
+
         SpecialRecipeBuilder.special(ItemTransmutationRecipe::new)
-                        .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "item_transmutation"));
-
-//        transmutationRecipe(recipeOutput, Tags.Items.OBSIDIANS, 4, Items.IRON_INGOT);
-//        transmutationRecipe(recipeOutput, Tags.Items.INGOTS_IRON, 4, Items.ENDER_PEARL);
-//        transmutationRecipe(recipeOutput, Tags.Items.INGOTS_IRON, 8, Items.GOLD_INGOT);
-    }
-
-    private void transmutationRecipe(RecipeOutput recipeOutput, TagKey<Item> ingredient, int ingredientCount, ItemLike result) {
-        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result);
-        builder.requires(MEItems.TRANSMUTATION_STONE);
-        for (int i = 0; i < ingredientCount; i++) {
-            builder.requires(ingredient);
-        }
-
-        builder.unlockedBy("has_transmutation_stone", has(MEItems.TRANSMUTATION_STONE))
-                .save(recipeOutput);
-    }
-
-    private void transmutationRecipe(RecipeOutput recipeOutput, ItemLike ingredient, int ingredientCount, ItemLike result) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, result)
-                .requires(ingredient, ingredientCount)
-                .requires(MEItems.TRANSMUTATION_STONE)
-                .unlockedBy("has_transmutation_stone", has(MEItems.TRANSMUTATION_STONE))
-                .save(recipeOutput);
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "item_transmutation"));
     }
 }

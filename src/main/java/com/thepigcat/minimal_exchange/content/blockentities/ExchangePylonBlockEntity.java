@@ -8,6 +8,8 @@ import com.thepigcat.minimal_exchange.content.menus.ExchangePylonMenu;
 import com.thepigcat.minimal_exchange.registries.MEBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -36,6 +38,9 @@ public class ExchangePylonBlockEntity extends ContainerBlockEntity implements Me
         if (!handler.getStackInSlot(0).isEmpty() && matterStorage.getMatter() < matterStorage.getMatterCapacity()) {
             handler.extractItem(0, 1, false);
             matterStorage.receiveMatter(1, false);
+            if (level.random.nextInt(8) == 0) {
+                level.playSound(null, worldPosition, SoundEvents.FIRECHARGE_USE, SoundSource.BLOCKS);
+            }
         }
 
         ItemStack stackInChargeSlot = handler.getStackInSlot(1);
