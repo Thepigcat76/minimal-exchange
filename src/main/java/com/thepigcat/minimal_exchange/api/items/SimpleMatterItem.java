@@ -1,8 +1,7 @@
 package com.thepigcat.minimal_exchange.api.items;
 
-import com.thepigcat.minimal_exchange.data.MECapabilities;
-import com.thepigcat.minimal_exchange.data.capabilities.IMatterStorage;
-import net.minecraft.ChatFormatting;
+import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
+import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.Item;

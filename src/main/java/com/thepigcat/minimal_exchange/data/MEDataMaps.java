@@ -1,7 +1,7 @@
 package com.thepigcat.minimal_exchange.data;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
-import com.thepigcat.minimal_exchange.data.maps.SpecialRecipeValue;
+import com.thepigcat.minimal_exchange.data.maps.ItemTransmutationValue;
 import com.thepigcat.minimal_exchange.util.CodecUtils;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,12 +21,12 @@ public final class MEDataMaps {
             BLOCK_CODEC,
             false
     ).build();
-    public static final DataMapType<Item, SpecialRecipeValue> SPECIAL_RECIPES = DataMapType.builder(
-            ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "special_recipes"),
+    public static final DataMapType<Item, ItemTransmutationValue> ITEM_TRANSMUTATIONS = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
             Registries.ITEM,
-            SpecialRecipeValue.CODEC
+            ItemTransmutationValue.CODEC
     ).synced(
-            SpecialRecipeValue.CODEC,
+            ItemTransmutationValue.CODEC,
             false
     ).build();
 }

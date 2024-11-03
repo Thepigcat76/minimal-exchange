@@ -1,6 +1,7 @@
 package com.thepigcat.minimal_exchange.datagen.assets;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
+import com.thepigcat.minimal_exchange.registries.MEBlocks;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +16,7 @@ public class MEBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        simpleBlock(MEBlocks.EXCHANGE_PYLON.get(), new ModelFile.UncheckedModelFile(modLoc("block/exchange_pylon")));
     }
 
     private ResourceLocation key(Block block) {

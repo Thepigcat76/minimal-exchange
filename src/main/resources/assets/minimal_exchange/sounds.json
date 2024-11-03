@@ -5,5 +5,12 @@
     "sounds": [
       "minimal_exchange:transmute"
     ]
+  },
+  "destruction_catalyst_destroy": {
+    "category": "players",
+    "subtitle": "minimal_exchange.destroy",
+    "sounds": [
+      "minimal_exchange:destruction_catalyst_destroy"
+    ]
   }
 }

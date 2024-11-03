@@ -1,11 +1,10 @@
-package com.thepigcat.minimal_exchange.data;
+package com.thepigcat.minimal_exchange.capabilities;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
-import com.thepigcat.minimal_exchange.data.capabilities.IMatterStorage;
+import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.capabilities.BlockCapability;
-import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.EntityCapability;
 import net.neoforged.neoforge.capabilities.ItemCapability;
 import org.jetbrains.annotations.Nullable;

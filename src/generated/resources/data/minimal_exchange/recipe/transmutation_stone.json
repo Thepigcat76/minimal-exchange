@@ -1,4 +1,21 @@
 {
-  "type": "minimal_exchange:special_recipes",
-  "category": "misc"
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "tag": "c:gems/diamond"
+    },
+    "S": {
+      "item": "minimal_exchange:minium_shard"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SDS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "minimal_exchange:transmutation_stone"
+  }
 }

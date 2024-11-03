@@ -1,6 +1,7 @@
 package com.thepigcat.minimal_exchange.registries;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
+import com.thepigcat.minimal_exchange.content.items.AlchemyBagItem;
 import com.thepigcat.minimal_exchange.content.items.DestructionCatalystItem;
 import com.thepigcat.minimal_exchange.content.items.TransmutationStoneItem;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
@@ -10,6 +11,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.component.DyedItemColor;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -29,15 +31,16 @@ public final class MEItems {
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<TransmutationStoneItem> TRANSMUTATION_STONE = register("transmutation_stone",
             () -> new TransmutationStoneItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, MatterComponent.EMPTY)
+                    .component(MEDataComponents.MATTER, new MatterComponent(3000, 3000))
                     .stacksTo(1)));
-    public static final DeferredItem<Item> ALCHEMY_BAG = register("alchemy_bag",
-            () -> new Item(new Item.Properties()
+    public static final DeferredItem<AlchemyBagItem> ALCHEMY_BAG = register("alchemy_bag",
+            () -> new AlchemyBagItem(new Item.Properties()
                     .component(DataComponents.DYED_COLOR, new DyedItemColor(FastColor.ARGB32.color(255, 255, 255), false))
+                    .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
                     .stacksTo(1)), false);
     public static final DeferredItem<DestructionCatalystItem> DESTRUCTION_CATALYST = register("destruction_catalyst",
             () -> new DestructionCatalystItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, MatterComponent.EMPTY)
+                    .component(MEDataComponents.MATTER, MatterComponent.withCapacity(1000))
                     .stacksTo(1)));
 
     private static <T extends Item> DeferredItem<T> register(String name, Supplier<T> itemSupplier, boolean addToTab) {
