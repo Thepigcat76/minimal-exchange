@@ -7,6 +7,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
@@ -27,6 +28,15 @@ public final class MEDataMaps {
             ItemTransmutationValue.CODEC
     ).synced(
             ItemTransmutationValue.CODEC,
+            false
+    ).build();
+    private static final Codec<EntityType<?>> ENTITY_CODEC = CodecUtils.registryCodec(BuiltInRegistries.ENTITY_TYPE);
+    public static final DataMapType<EntityType<?>, EntityType<?>> ENTITY_TRANSMUTATIONS = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
+            Registries.ENTITY_TYPE,
+            ENTITY_CODEC
+    ).synced(
+            ENTITY_CODEC,
             false
     ).build();
 }

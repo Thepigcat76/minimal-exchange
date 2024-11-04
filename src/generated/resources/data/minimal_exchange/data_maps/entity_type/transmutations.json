@@ -1,0 +1,11 @@
+{
+  "values": {
+    "minecraft:bat": "minecraft:chicken",
+    "minecraft:chicken": "minecraft:parrot",
+    "minecraft:glow_squid": "minecraft:squid",
+    "minecraft:magma_cube": "minecraft:slime",
+    "minecraft:parrot": "minecraft:bat",
+    "minecraft:slime": "minecraft:magma_cube",
+    "minecraft:squid": "minecraft:glow_squid"
+  }
+}

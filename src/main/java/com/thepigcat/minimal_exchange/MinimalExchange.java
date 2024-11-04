@@ -65,6 +65,7 @@ public final class MinimalExchange {
     private void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(MEDataMaps.BLOCK_TRANSMUTATIONS);
         event.register(MEDataMaps.ITEM_TRANSMUTATIONS);
+        event.register(MEDataMaps.ENTITY_TRANSMUTATIONS);
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {

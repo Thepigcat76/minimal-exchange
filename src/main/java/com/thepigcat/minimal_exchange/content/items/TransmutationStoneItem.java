@@ -7,10 +7,16 @@ import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
 import com.thepigcat.minimal_exchange.registries.MESoundEvents;
+import com.thepigcat.minimal_exchange.util.EntityUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -41,6 +47,28 @@ public class TransmutationStoneItem extends SimpleMatterItem {
                 // TODO: CONFIG
                 matterStorage.extractMatter(1, false);
                 return InteractionResult.SUCCESS;
+            }
+        }
+        return InteractionResult.FAIL;
+    }
+
+    @Override
+    public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
+        Level level = player.level();
+        IMatterStorage matterStorage = stack.getCapability(MECapabilities.MatterStorage.ITEM);
+        if(target instanceof Mob targetMob && matterStorage.getMatter() > 0) {
+            EntityType<?> transmutatedEntityType = EntityUtils.holder(target.getType()).getData(MEDataMaps.ENTITY_TRANSMUTATIONS);
+            if(transmutatedEntityType != null) {
+                Entity transmutatedEntity = transmutatedEntityType.create(level);
+                if(transmutatedEntity instanceof Mob) {
+                    if(!level.isClientSide()) {
+                        targetMob.convertTo((EntityType<? extends Mob>) transmutatedEntityType, true);
+                        target.level().playSound(null, target.blockPosition(), MESoundEvents.TRANSMUTE.get(), SoundSource.PLAYERS, 0.8f, 1);
+                        // TODO: CONFIG
+                        matterStorage.extractMatter(1, false);
+                    }
+                    return InteractionResult.SUCCESS;
+                }
             }
         }
         return InteractionResult.FAIL;
