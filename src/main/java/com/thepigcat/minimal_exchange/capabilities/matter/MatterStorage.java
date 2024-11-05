@@ -10,10 +10,6 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.UnknownNullability;
-
-import java.util.Optional;
 
 public class MatterStorage implements IMatterStorage, INBTSerializable<CompoundTag> {
     private int matter;

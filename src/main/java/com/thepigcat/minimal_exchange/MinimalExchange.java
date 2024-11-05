@@ -1,9 +1,10 @@
 package com.thepigcat.minimal_exchange;
 
+import com.mojang.logging.LogUtils;
 import com.thepigcat.minimal_exchange.api.items.IMatterItem;
+import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.MatterComponentWrapper;
 import com.thepigcat.minimal_exchange.content.recipes.ItemTransmutationRecipe;
-import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
@@ -11,27 +12,27 @@ import com.thepigcat.minimal_exchange.registries.*;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.DyedItemColor;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.minecraft.world.level.ItemLike;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.items.ComponentItemHandler;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
-
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.items.ComponentItemHandler;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import org.slf4j.Logger;
 
 import java.util.function.Supplier;
 
@@ -89,7 +90,6 @@ public final class MinimalExchange {
     static {
         CREATIVE_MODE_TABS.register("me_tab", () -> CreativeModeTab.builder()
                 .title(Component.translatable("itemGroup.minimal_exchange.me_tab"))
-                .withTabsBefore(CreativeModeTabs.COMBAT)
                 .icon(() -> MEItems.TRANSMUTATION_STONE.get().getDefaultInstance())
                 .displayItems((parameters, output) -> {
                     for (ItemLike item : MEItems.TAB_ITEMS) {

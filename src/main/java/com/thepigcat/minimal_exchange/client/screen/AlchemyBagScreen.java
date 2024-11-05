@@ -6,8 +6,6 @@ import com.thepigcat.minimal_exchange.content.menus.AlchemyBagMenu;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.CapabilityHooks;
 import org.jetbrains.annotations.NotNull;
 
 public class AlchemyBagScreen extends MEAbstractContainerScreen<AlchemyBagMenu> {

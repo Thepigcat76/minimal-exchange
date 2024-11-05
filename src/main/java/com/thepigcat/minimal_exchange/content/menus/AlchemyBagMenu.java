@@ -1,19 +1,13 @@
 package com.thepigcat.minimal_exchange.content.menus;
 
-import com.mojang.serialization.DynamicOps;
 import com.thepigcat.minimal_exchange.api.menus.MEAbstractContainerMenu;
 import com.thepigcat.minimal_exchange.registries.MEMenuTypes;
-import net.minecraft.core.Registry;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.CapabilityHooks;
 import net.neoforged.neoforge.items.IItemHandler;
-import net.neoforged.neoforge.items.ItemHandlerCopySlot;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class AlchemyBagMenu extends MEAbstractContainerMenu {

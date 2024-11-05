@@ -4,7 +4,6 @@ import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;

@@ -1,9 +1,9 @@
 package com.thepigcat.minimal_exchange.data;
 
+import com.mojang.serialization.Codec;
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.data.maps.ItemTransmutationValue;
 import com.thepigcat.minimal_exchange.util.CodecUtils;
-import com.mojang.serialization.Codec;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;

@@ -1,6 +1,5 @@
 package com.thepigcat.minimal_exchange.content.blockentities;
 
-import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.api.blockentities.ContainerBlockEntity;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;

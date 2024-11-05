@@ -2,9 +2,9 @@ package com.thepigcat.minimal_exchange.content.items;
 
 import com.thepigcat.minimal_exchange.api.items.SimpleMatterItem;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
+import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
-import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
 import com.thepigcat.minimal_exchange.registries.MESoundEvents;
 import net.minecraft.core.BlockPos;
