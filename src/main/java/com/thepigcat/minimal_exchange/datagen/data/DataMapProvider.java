@@ -2,8 +2,10 @@ package com.thepigcat.minimal_exchange.datagen.data;
 
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.data.maps.ItemTransmutationValue;
+import com.thepigcat.minimal_exchange.util.EntityUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
@@ -21,5 +23,14 @@ public class DataMapProvider extends net.neoforged.neoforge.common.data.DataMapP
                                 Items.ENDER_PEARL.getDefaultInstance(),
                                 4
                         ), false);
+
+        builder(MEDataMaps.ENTITY_TRANSMUTATIONS)
+                .add(EntityUtils.resourceKey(EntityType.CHICKEN), EntityType.PARROT, false)
+                .add(EntityUtils.resourceKey(EntityType.PARROT), EntityType.BAT, false)
+                .add(EntityUtils.resourceKey(EntityType.BAT), EntityType.CHICKEN, false)
+                .add(EntityUtils.resourceKey(EntityType.SQUID), EntityType.GLOW_SQUID, false)
+                .add(EntityUtils.resourceKey(EntityType.GLOW_SQUID), EntityType.SQUID, false)
+                .add(EntityUtils.resourceKey(EntityType.SLIME), EntityType.MAGMA_CUBE, false)
+                .add(EntityUtils.resourceKey(EntityType.MAGMA_CUBE), EntityType.SLIME, false);
     }
 }
