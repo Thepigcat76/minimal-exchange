@@ -1,0 +1,16 @@
+{
+  "values": {
+    "minecraft:cobblestone": {
+      "result": "minecraft:grass_block"
+    },
+    "minecraft:dirt": {
+      "result": "minecraft:cobblestone"
+    },
+    "minecraft:grass_block": {
+      "result": "minecraft:sand"
+    },
+    "minecraft:sand": {
+      "result": "minecraft:dirt"
+    }
+  }
+}
