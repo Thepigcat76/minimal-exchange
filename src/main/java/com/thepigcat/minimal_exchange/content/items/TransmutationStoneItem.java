@@ -3,13 +3,14 @@ package com.thepigcat.minimal_exchange.content.items;
 import com.thepigcat.minimal_exchange.api.items.SimpleMatterItem;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
-import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
-import com.thepigcat.minimal_exchange.data.components.MatterComponent;
+import com.thepigcat.minimal_exchange.data.maps.BlockTransmutationValue;
+import com.thepigcat.minimal_exchange.data.maps.EntityTransmutationValue;
 import com.thepigcat.minimal_exchange.registries.MESoundEvents;
-import com.thepigcat.minimal_exchange.util.EntityUtils;
+import com.thepigcat.minimal_exchange.util.RegistryUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -23,7 +24,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.NotNull;
 
 public class TransmutationStoneItem extends SimpleMatterItem {
     public TransmutationStoneItem(Properties properties) {
@@ -37,15 +37,15 @@ public class TransmutationStoneItem extends SimpleMatterItem {
         BlockState blockState = level.getBlockState(clickedPos);
         ItemStack stack = context.getItemInHand();
 
-        IMatterStorage matterStorage = stack.getCapability(MECapabilities.MatterStorage.ITEM);
-        if (matterStorage.getMatter() > 0) {
-            Holder<Block> blockHolder = blockState.getBlockHolder();
-            Block transmutatedBlock = blockHolder.getData(MEDataMaps.BLOCK_TRANSMUTATIONS);
-            if (transmutatedBlock != null) {
-                level.setBlockAndUpdate(context.getClickedPos(), transmutatedBlock.defaultBlockState());
+        Holder<Block> blockHolder = blockState.getBlockHolder();
+        BlockTransmutationValue transmutation = blockHolder.getData(MEDataMaps.BLOCK_TRANSMUTATIONS);
+        if (transmutation != null) {
+            int matterCost = transmutation.matterCost();
+            IMatterStorage matterStorage = stack.getCapability(MECapabilities.MatterStorage.ITEM);
+            if (matterStorage.getMatter() >= matterCost) {
+                level.setBlockAndUpdate(context.getClickedPos(), transmutation.result().defaultBlockState());
                 level.playSound(null, clickedPos, MESoundEvents.TRANSMUTE.get(), SoundSource.PLAYERS, 0.8f, 1);
-                // TODO: CONFIG
-                matterStorage.extractMatter(1, false);
+                matterStorage.extractMatter(matterCost, false);
                 return InteractionResult.SUCCESS;
             }
         }
@@ -55,41 +55,24 @@ public class TransmutationStoneItem extends SimpleMatterItem {
     @Override
     public InteractionResult interactLivingEntity(ItemStack stack, Player player, LivingEntity target, InteractionHand hand) {
         Level level = player.level();
-        IMatterStorage matterStorage = stack.getCapability(MECapabilities.MatterStorage.ITEM);
-        if(target instanceof Mob targetMob && matterStorage.getMatter() > 0) {
-            EntityType<?> transmutatedEntityType = EntityUtils.holder(target.getType()).getData(MEDataMaps.ENTITY_TRANSMUTATIONS);
-            if(transmutatedEntityType != null) {
+        EntityTransmutationValue transmutation = RegistryUtils.holder(BuiltInRegistries.ENTITY_TYPE, target.getType()).getData(MEDataMaps.ENTITY_TRANSMUTATIONS);
+        if (transmutation != null) {
+            int matterCost = transmutation.matterCost();
+            IMatterStorage matterStorage = stack.getCapability(MECapabilities.MatterStorage.ITEM);
+            if (target instanceof Mob targetMob && matterStorage.getMatter() >= matterCost) {
+                EntityType<?> transmutatedEntityType = transmutation.result();
                 Entity transmutatedEntity = transmutatedEntityType.create(level);
-                if(transmutatedEntity instanceof Mob) {
-                    if(!level.isClientSide()) {
+                if (transmutatedEntity instanceof Mob) {
+                    if (!level.isClientSide()) {
                         targetMob.convertTo((EntityType<? extends Mob>) transmutatedEntityType, true);
                         target.level().playSound(null, target.blockPosition(), MESoundEvents.TRANSMUTE.get(), SoundSource.PLAYERS, 0.8f, 1);
-                        // TODO: CONFIG
-                        matterStorage.extractMatter(1, false);
+                        matterStorage.extractMatter(matterCost, false);
                     }
                     return InteractionResult.SUCCESS;
                 }
             }
         }
         return InteractionResult.FAIL;
-    }
-
-    @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public @NotNull ItemStack getCraftingRemainingItem(ItemStack itemStack) {
-        ItemStack itemStack1 = itemStack.copy();
-        IMatterStorage matterStorage = itemStack1.getCapability(MECapabilities.MatterStorage.ITEM);
-        itemStack1.set(MEDataComponents.MATTER, new MatterComponent(matterStorage.getMatter() - 1, matterStorage.getMatterCapacity()));
-        return itemStack1;
-    }
-
-    @Override
-    public void onCraftedBy(ItemStack stack, Level level, Player player) {
-        super.onCraftedBy(stack, level, player);
     }
 
     // TODO: Config

@@ -1,3 +1,4 @@
-// 1.21.1	2024-11-04T17:31:48.7966619	Data Maps
-0c2965b59b1bb5c90ce01ef428acc04c3251c5dc data/minimal_exchange/data_maps/entity_type/transmutations.json
+// 1.21.1	2024-11-05T19:59:54.2668798	Data Maps
+938ba7bdbf32dc3f377cb4cf0d410561f32df413 data/minimal_exchange/data_maps/block/transmutations.json
+23ac32c1f53faa8106b0a51f298e569a42bb8080 data/minimal_exchange/data_maps/entity_type/transmutations.json
 dc55051d5abbddcbc7c4d8897e0ff344c612f2d5 data/minimal_exchange/data_maps/item/transmutations.json

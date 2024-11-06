@@ -1,10 +1,9 @@
 package com.thepigcat.minimal_exchange.data;
 
-import com.mojang.serialization.Codec;
 import com.thepigcat.minimal_exchange.MinimalExchange;
+import com.thepigcat.minimal_exchange.data.maps.BlockTransmutationValue;
+import com.thepigcat.minimal_exchange.data.maps.EntityTransmutationValue;
 import com.thepigcat.minimal_exchange.data.maps.ItemTransmutationValue;
-import com.thepigcat.minimal_exchange.util.CodecUtils;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
@@ -13,15 +12,15 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
 public final class MEDataMaps {
-    private static final Codec<Block> BLOCK_CODEC = CodecUtils.registryCodec(BuiltInRegistries.BLOCK);
-    public static final DataMapType<Block, Block> BLOCK_TRANSMUTATIONS = DataMapType.builder(
+    public static final DataMapType<Block, BlockTransmutationValue> BLOCK_TRANSMUTATIONS = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
             Registries.BLOCK,
-            BLOCK_CODEC
+            BlockTransmutationValue.CODEC
     ).synced(
-            BLOCK_CODEC,
+            BlockTransmutationValue.CODEC,
             false
     ).build();
+
     public static final DataMapType<Item, ItemTransmutationValue> ITEM_TRANSMUTATIONS = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
             Registries.ITEM,
@@ -30,13 +29,13 @@ public final class MEDataMaps {
             ItemTransmutationValue.CODEC,
             false
     ).build();
-    private static final Codec<EntityType<?>> ENTITY_CODEC = CodecUtils.registryCodec(BuiltInRegistries.ENTITY_TYPE);
-    public static final DataMapType<EntityType<?>, EntityType<?>> ENTITY_TRANSMUTATIONS = DataMapType.builder(
+
+    public static final DataMapType<EntityType<?>, EntityTransmutationValue> ENTITY_TRANSMUTATIONS = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
             Registries.ENTITY_TYPE,
-            ENTITY_CODEC
+            EntityTransmutationValue.CODEC
     ).synced(
-            ENTITY_CODEC,
+            EntityTransmutationValue.CODEC,
             false
     ).build();
 }

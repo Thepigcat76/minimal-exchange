@@ -1,7 +1,0 @@
-{
-  "values": {
-    "minecraft:sand": "minecraft:dirt",
-    "minecraft:dirt": "minecraft:cobblestone",
-    "minecraft:cobblestone": "minecraft:grass_block"
-  }
-}
