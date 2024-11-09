@@ -13,9 +13,8 @@ public class AlchemyBagScreen extends MEAbstractContainerScreen<AlchemyBagMenu> 
 
     public AlchemyBagScreen(AlchemyBagMenu menu, Inventory playerInventory, Component title) {
         super(menu, playerInventory, title);
-        this.imageHeight = 209;
-        this.inventoryLabelY = this.imageHeight - 94 + 3;
-        this.titleLabelY = 1;
+        this.imageHeight = 114 + 6 * 18;
+        this.inventoryLabelY = this.imageHeight - 94;
     }
 
     @Override

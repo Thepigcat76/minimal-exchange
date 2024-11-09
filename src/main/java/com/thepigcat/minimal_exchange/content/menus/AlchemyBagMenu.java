@@ -21,15 +21,15 @@ public class AlchemyBagMenu extends MEAbstractContainerMenu {
         this.inventory = inventory;
         this.itemHandler = itemStack.getCapability(Capabilities.ItemHandler.ITEM);
 
-        addPlayerInventory(inventory, 83 + 44);
-        addPlayerHotbar(inventory, 141 + 44);
-
-        int y = 10;
-        for (int i = 0; i < 6; ++i) {
-            for (int l = 0; l < 9; ++l) {
-                this.addSlot(new SlotItemHandler(itemHandler, l + i * 9, 8 + l * 18, y + i * 18));
+        int y = 18;
+        for (int row = 0; row < 6; row++) {
+            for (int column = 0; column < 9; column++) {
+                this.addSlot(new SlotItemHandler(itemHandler, column + row * 9, 8 + column * 18, y + row * 18));
             }
         }
+
+        addPlayerInventory(inventory, 140);
+        addPlayerHotbar(inventory, 198);
     }
 
     public AlchemyBagMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf byteBuf) {
