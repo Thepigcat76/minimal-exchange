@@ -7,6 +7,8 @@ import com.thepigcat.minimal_exchange.registries.MEItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.registration.IRecipeCatalystRegistration;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.NonNullList;
@@ -17,9 +19,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemLore;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.level.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -37,10 +39,30 @@ public class MEJeiPlugin implements IModPlugin {
 
     @Override
     public void registerRecipes(IRecipeRegistration registration) {
-        registration.addRecipes(RecipeTypes.CRAFTING, getRecipes());
+        registration.addRecipes(RecipeTypes.CRAFTING, getItemTransmutations());
+        registration.addRecipes(BlockTransmutationCategory.BLOCK_TRANSMUTATION_TYPE, getBlockTransmutations());
     }
 
-    private static List<RecipeHolder<CraftingRecipe>> getRecipes() {
+    @Override
+    public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
+        registration.addRecipeCatalyst(MEItems.TRANSMUTATION_STONE, BlockTransmutationCategory.BLOCK_TRANSMUTATION_TYPE);
+    }
+
+    private static List<BlockTransmutationRecipe> getBlockTransmutations() {
+        Map<ResourceKey<Block>, Block> transmutations = BuiltInRegistries.BLOCK.getDataMap(MEDataMaps.BLOCK_TRANSMUTATIONS);
+        List<BlockTransmutationRecipe> recipes = new ArrayList<>();
+        for (Map.Entry<ResourceKey<Block>, Block> transmutation : transmutations.entrySet()) {
+            recipes.add(new BlockTransmutationRecipe(BuiltInRegistries.BLOCK.get(transmutation.getKey()), transmutation.getValue()));
+        }
+        return recipes;
+    }
+
+    @Override
+    public void registerCategories(IRecipeCategoryRegistration registration) {
+        registration.addRecipeCategories(new BlockTransmutationCategory(registration.getJeiHelpers().getGuiHelper()));
+    }
+
+    private static List<RecipeHolder<CraftingRecipe>> getItemTransmutations() {
         Map<ResourceKey<Item>, ItemTransmutationValue> transmutations = BuiltInRegistries.ITEM.getDataMap(MEDataMaps.ITEM_TRANSMUTATIONS);
         List<RecipeHolder<CraftingRecipe>> recipes = new ArrayList<>();
 
