@@ -48,6 +48,8 @@ public final class MinimalExchange {
             () -> new SimpleCraftingRecipeSerializer<>(ItemTransmutationRecipe::new));
 
     public MinimalExchange(IEventBus modEventBus, ModContainer modContainer) {
+        modContainer.registerConfig(ModConfig.Type.COMMON, MEConfig.SPEC);
+
         MEDataComponents.DATA_COMPONENTS.register(modEventBus);
         MEItems.ITEMS.register(modEventBus);
         MEBlocks.BLOCKS.register(modEventBus);
@@ -59,8 +61,6 @@ public final class MinimalExchange {
 
         modEventBus.addListener(this::registerDataMaps);
         modEventBus.addListener(this::registerCapabilities);
-
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void registerDataMaps(RegisterDataMapTypesEvent event) {
