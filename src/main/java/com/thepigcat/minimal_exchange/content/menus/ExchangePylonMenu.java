@@ -1,6 +1,7 @@
 package com.thepigcat.minimal_exchange.content.menus;
 
 import com.thepigcat.minimal_exchange.api.menus.MEAbstractContainerMenu;
+import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.content.blockentities.ExchangePylonBlockEntity;
 import com.thepigcat.minimal_exchange.registries.MEBlocks;
 import com.thepigcat.minimal_exchange.registries.MEMenuTypes;
@@ -8,6 +9,8 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class ExchangePylonMenu extends MEAbstractContainerMenu {
