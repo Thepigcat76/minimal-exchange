@@ -1,5 +1,6 @@
 package com.thepigcat.minimal_exchange.content.blockentities;
 
+import com.thepigcat.minimal_exchange.MEConfig;
 import com.thepigcat.minimal_exchange.api.blockentities.ContainerBlockEntity;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
@@ -26,7 +27,7 @@ public class ExchangePylonBlockEntity extends ContainerBlockEntity implements Me
             IMatterStorage matterStorage = item.getCapability(MECapabilities.MatterStorage.ITEM);
             return (slot == 0 && matterStorage == null) || (slot == 1 && matterStorage != null);
         });
-        addMatterStorage(100);
+        addMatterStorage(MEConfig.exchangePylonMatterCapacity);
     }
 
     // TODO: Particles

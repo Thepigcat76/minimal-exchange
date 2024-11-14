@@ -1,5 +1,6 @@
 package com.thepigcat.minimal_exchange.content.items;
 
+import com.thepigcat.minimal_exchange.MEConfig;
 import com.thepigcat.minimal_exchange.api.items.SimpleMatterItem;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
@@ -75,9 +76,8 @@ public class TransmutationStoneItem extends SimpleMatterItem {
         return InteractionResult.FAIL;
     }
 
-    // TODO: Config
     @Override
     public int getMatterCapacity(ItemStack itemStack) {
-        return 3000;
+        return MEConfig.transmutationStoneMatterCapacity;
     }
 }

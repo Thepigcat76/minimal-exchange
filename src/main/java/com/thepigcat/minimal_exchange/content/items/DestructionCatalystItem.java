@@ -1,5 +1,6 @@
 package com.thepigcat.minimal_exchange.content.items;
 
+import com.thepigcat.minimal_exchange.MEConfig;
 import com.thepigcat.minimal_exchange.api.items.SimpleMatterItem;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
@@ -28,7 +29,7 @@ public class DestructionCatalystItem extends SimpleMatterItem {
 
     @Override
     public int getMatterCapacity(ItemStack itemStack) {
-        return 2000;
+        return MEConfig.destructionCatalystMatterCapacity;
     }
 
     @Override
