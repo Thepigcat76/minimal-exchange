@@ -1,7 +1,6 @@
 package com.thepigcat.minimal_exchange.content.items;
 
 import com.thepigcat.minimal_exchange.content.menus.AlchemyBagMenu;
-import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.SimpleMenuProvider;
@@ -22,9 +21,10 @@ public class AlchemyBagItem extends Item {
 
         player.openMenu(new SimpleMenuProvider(
                 (containerId, playerInventory, player1) -> new AlchemyBagMenu(containerId, playerInventory, itemStack),
-                Component.literal("Alchemy Bag")),
+                itemStack.getHoverName()),
                 byteBuf -> ItemStack.STREAM_CODEC.encode(byteBuf, itemStack)
         );
+        player.swing(usedHand);
         return InteractionResultHolder.success(itemStack);
     }
 }
