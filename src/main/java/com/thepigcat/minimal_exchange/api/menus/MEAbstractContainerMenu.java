@@ -18,7 +18,9 @@ public abstract class MEAbstractContainerMenu extends AbstractContainerMenu {
     }
 
     protected void addPlayerHotbar(Inventory playerInventory) {
-        addPlayerHotbar(playerInventory, 141);
+        for (int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 141));
+        }
     }
 
     protected void addPlayerInventory(Inventory playerInventory, int y) {
@@ -26,12 +28,6 @@ public abstract class MEAbstractContainerMenu extends AbstractContainerMenu {
             for (int l = 0; l < 9; ++l) {
                 this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 8 + l * 18, y + i * 18));
             }
-        }
-    }
-
-    protected void addPlayerHotbar(Inventory playerInventory, int y) {
-        for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18, y));
         }
     }
 

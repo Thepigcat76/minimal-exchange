@@ -4,6 +4,7 @@ import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.api.client.screens.MEAbstractContainerScreen;
 import com.thepigcat.minimal_exchange.capabilities.matter.IMatterStorage;
 import com.thepigcat.minimal_exchange.content.menus.ExchangePylonMenu;
+import com.thepigcat.minimal_exchange.util.RenderUtils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -25,12 +26,7 @@ public class ExchangePylonScreen extends MEAbstractContainerScreen<ExchangePylon
         IMatterStorage matterStorage = menu.getBlockEntity().getMatterStorage();
         int matter = matterStorage.getMatter();
         int matterCapacity = matterStorage.getMatterCapacity();
-        drawCenteredString(guiGraphics, Minecraft.getInstance().font, Component.literal(matter + "/" + matterCapacity + " Matter").withStyle(ChatFormatting.DARK_GRAY), this.width / 2, this.topPos + imageHeight / 4, 0, false);
-    }
-
-    public void drawCenteredString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, int color, boolean dropShadow) {
-        FormattedCharSequence formattedcharsequence = text.getVisualOrderText();
-        guiGraphics.drawString(font, formattedcharsequence, x - font.width(formattedcharsequence) / 2, y, color, dropShadow);
+        RenderUtils.drawCenteredString(guiGraphics, Minecraft.getInstance().font, Component.literal(matter + "/" + matterCapacity + " Matter").withStyle(ChatFormatting.DARK_GRAY), this.width / 2, this.topPos + imageHeight / 4, 0, false);
     }
 
     @Override

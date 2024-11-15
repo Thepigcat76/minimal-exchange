@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -32,7 +33,7 @@ public class DataMapProvider extends net.neoforged.neoforge.common.data.DataMapP
                 .add(RegistryUtils.resourceKey(BuiltInRegistries.BLOCK, input), new BlockTransmutationValue(output, matterCost), false);
     }
 
-    private void entityTransmutation(EntityType<?> input, EntityType<?> output, int matterCost) {
+    private void entityTransmutation(EntityType<?> input, EntityType<? extends LivingEntity> output, int matterCost) {
         builder(MEDataMaps.ENTITY_TRANSMUTATIONS)
                 .add(RegistryUtils.resourceKey(BuiltInRegistries.ENTITY_TYPE, input), new EntityTransmutationValue(output, matterCost), false);
     }

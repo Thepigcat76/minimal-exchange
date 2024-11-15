@@ -5,6 +5,7 @@ import com.thepigcat.minimal_exchange.registries.MEMenuTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -15,7 +16,7 @@ public class AlchemyBagMenu extends MEAbstractContainerMenu {
     private final Inventory inventory;
     private final IItemHandler itemHandler;
 
-    public AlchemyBagMenu(int containerId, Inventory inventory, ItemStack itemStack) {
+    public AlchemyBagMenu(int containerId, Inventory inventory, ItemStack itemStack, int slot) {
         super(MEMenuTypes.ALCHEMY_BAG.get(), containerId);
         this.itemStack = itemStack;
         this.inventory = inventory;
@@ -29,11 +30,17 @@ public class AlchemyBagMenu extends MEAbstractContainerMenu {
         }
 
         addPlayerInventory(inventory, 140);
-        addPlayerHotbar(inventory, 198);
+        for (int i = 0; i < 9; ++i) {
+            if (i != slot) {
+                this.addSlot(new Slot(inventory, i, 8 + i * 18, 198));
+            } else {
+                this.addSlot(new NonInteractiveSlot(inventory, i, 8 + i * 18, 198));
+            }
+        }
     }
 
     public AlchemyBagMenu(int containerId, Inventory inventory, RegistryFriendlyByteBuf byteBuf) {
-        this(containerId, inventory, ItemStack.STREAM_CODEC.decode(byteBuf));
+        this(containerId, inventory, ItemStack.STREAM_CODEC.decode(byteBuf), byteBuf.readInt());
     }
 
     @Override

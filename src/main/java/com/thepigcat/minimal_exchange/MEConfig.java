@@ -6,7 +6,7 @@ import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 @EventBusSubscriber(modid = MinimalExchange.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class MEConfig {
+public final class MEConfig {
 	private static final ModConfigSpec.Builder BUILDER;
 
 	private static final ModConfigSpec.IntValue TRANSMUTATION_STONE_MATTER_CAPACITY;
