@@ -1,6 +1,7 @@
 package com.thepigcat.minimal_exchange.content.menus;
 
 import com.thepigcat.minimal_exchange.api.menus.MEAbstractContainerMenu;
+import com.thepigcat.minimal_exchange.data.components.MEComponentItemHandler;
 import com.thepigcat.minimal_exchange.registries.MEMenuTypes;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -12,6 +13,8 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class AlchemyBagMenu extends MEAbstractContainerMenu {
+    public static final int COLUMNS = 9;
+    public static final int ROWS = 6;
     private final ItemStack itemStack;
     private final Inventory inventory;
     private final IItemHandler itemHandler;
@@ -23,8 +26,8 @@ public class AlchemyBagMenu extends MEAbstractContainerMenu {
         this.itemHandler = itemStack.getCapability(Capabilities.ItemHandler.ITEM);
 
         int y = 18;
-        for (int row = 0; row < 6; row++) {
-            for (int column = 0; column < 9; column++) {
+        for (int row = 0; row < ROWS; row++) {
+            for (int column = 0; column < COLUMNS; column++) {
                 this.addSlot(new SlotItemHandler(itemHandler, column + row * 9, 8 + column * 18, y + row * 18));
             }
         }
@@ -47,5 +50,33 @@ public class AlchemyBagMenu extends MEAbstractContainerMenu {
     public boolean stillValid(Player player) {
         return player.getMainHandItem().is(itemStack.getItem())
                 || player.getOffhandItem().is(itemStack.getItem());
+    }
+
+    /**
+     * Implementation taken from {@link net.minecraft.world.inventory.ChestMenu#quickMoveStack(Player, int)}
+     */
+    @Override
+    public ItemStack quickMoveStack(Player player, int index) {
+        ItemStack itemstack = ItemStack.EMPTY;
+        Slot slot = this.slots.get(index);
+        if (slot.hasItem()) {
+            ItemStack itemstack1 = slot.getItem();
+            itemstack = itemstack1.copy();
+            if (index < ROWS * 9) {
+                if (!this.moveItemStackTo(itemstack1, ROWS * 9, this.slots.size(), true)) {
+                    return ItemStack.EMPTY;
+                }
+            } else if (!this.moveItemStackTo(itemstack1, 0, ROWS * 9, false)) {
+                return ItemStack.EMPTY;
+            }
+
+            if (itemstack1.isEmpty()) {
+                slot.setByPlayer(ItemStack.EMPTY);
+            } else {
+                slot.setChanged();
+            }
+        }
+
+        return itemstack;
     }
 }

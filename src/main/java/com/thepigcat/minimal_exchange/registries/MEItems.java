@@ -28,13 +28,15 @@ public final class MEItems {
 
     public static final DeferredItem<Item> MINIUM_SHARD = register("minium_shard",
             () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> IRON_BAND = register("iron_band",
+            () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> WEAK_COVALENCE_DUST = register("weak_covalence_dust",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> STRONG_COVALENCE_DUST = register("strong_covalence_dust",
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<TransmutationStoneItem> TRANSMUTATION_STONE = register("transmutation_stone",
             () -> new TransmutationStoneItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, new MatterComponent(3000, 3000))
+                    .component(MEDataComponents.MATTER, new MatterComponent())
                     .stacksTo(1)));
     public static final DeferredItem<AlchemyBagItem> ALCHEMY_BAG = register("alchemy_bag",
             () -> new AlchemyBagItem(new Item.Properties()
@@ -43,7 +45,7 @@ public final class MEItems {
                     .stacksTo(1)), false);
     public static final DeferredItem<DestructionCatalystItem> DESTRUCTION_CATALYST = register("destruction_catalyst",
             () -> new DestructionCatalystItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, MatterComponent.withCapacity(1000))
+                    .component(MEDataComponents.MATTER, new MatterComponent())
                     .stacksTo(1)));
 
     private static <T extends Item> DeferredItem<T> register(String name, Supplier<T> itemSupplier, boolean addToTab) {

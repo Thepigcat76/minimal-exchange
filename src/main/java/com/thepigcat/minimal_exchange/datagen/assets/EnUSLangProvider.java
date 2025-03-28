@@ -14,6 +14,7 @@ public class EnUSLangProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         addItem(MEItems.MINIUM_SHARD, "Minium Shard");
+        addItem(MEItems.IRON_BAND, "Iron Band");
         addItem(MEItems.TRANSMUTATION_STONE, "Transmutation Stone");
         addItem(MEItems.DESTRUCTION_CATALYST, "Destruction Catalyst");
         addItem(MEItems.ALCHEMY_BAG, "Alchemy Bag");

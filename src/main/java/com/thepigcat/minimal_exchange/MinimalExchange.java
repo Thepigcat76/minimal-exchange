@@ -3,8 +3,10 @@ package com.thepigcat.minimal_exchange;
 import com.mojang.logging.LogUtils;
 import com.thepigcat.minimal_exchange.api.items.IMatterItem;
 import com.thepigcat.minimal_exchange.capabilities.MECapabilities;
+import com.thepigcat.minimal_exchange.capabilities.matter.MatterAttachmentWrapper;
 import com.thepigcat.minimal_exchange.capabilities.matter.MatterComponentWrapper;
 import com.thepigcat.minimal_exchange.content.recipes.ItemTransmutationRecipe;
+import com.thepigcat.minimal_exchange.data.MEAttachmentTypes;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
@@ -15,6 +17,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FastColor;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -56,6 +59,7 @@ public final class MinimalExchange {
         MESoundEvents.SOUND_EVENTS.register(modEventBus);
         MEMenuTypes.MENUS.register(modEventBus);
         MEBlockEntityTypes.BLOCK_ENTITIES.register(modEventBus);
+        MEAttachmentTypes.ATTACHMENTS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         RECIPE_SERIALIZERS.register(modEventBus);
 
@@ -75,8 +79,8 @@ public final class MinimalExchange {
                 event.registerItem(MECapabilities.MatterStorage.ITEM, (itemstack, ctx) -> {
                     if (itemstack.has(MEDataComponents.MATTER)) {
                         MatterComponent matterComponent = itemstack.get(MEDataComponents.MATTER);
-                        itemstack.set(MEDataComponents.MATTER, new MatterComponent(matterComponent.matter(), matterItem.getMatterCapacity(itemstack)));
-                        return new MatterComponentWrapper(itemstack);
+                        itemstack.set(MEDataComponents.MATTER, new MatterComponent(matterComponent.matter()));
+                        return new MatterComponentWrapper(itemstack, matterItem.getMatterCapacity(itemstack));
                     }
                     throw new RuntimeException("Item that implement IMatterItem interface needs the MATTER DataComponent, affected item: " + item);
                 }, item);
@@ -86,6 +90,8 @@ public final class MinimalExchange {
         event.registerItem(Capabilities.ItemHandler.ITEM, (item, ctx) -> new ComponentItemHandler(item, DataComponents.CONTAINER, 54),
                 MEItems.ALCHEMY_BAG.get());
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, MEBlockEntityTypes.EXCHANGE_PYLON.get(), (be, ctx) -> be.getItemHandler());
+
+        event.registerEntity(MECapabilities.MatterStorage.ENTITY, EntityType.PLAYER, (p, d) -> new MatterAttachmentWrapper(p, Integer.MAX_VALUE));
     }
 
     static {
@@ -97,9 +103,9 @@ public final class MinimalExchange {
                         if (item.asItem() instanceof IMatterItem matterItem) {
                             ItemStack itemStack = new ItemStack(item);
                             int matterCapacity = matterItem.getMatterCapacity(itemStack);
-                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(matterCapacity, matterCapacity));
+                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(matterCapacity));
                             output.accept(itemStack.copy());
-                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(0, matterCapacity));
+                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(0));
                             output.accept(itemStack.copy());
                         } else {
                             output.accept(item);

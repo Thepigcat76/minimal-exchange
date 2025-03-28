@@ -8,40 +8,29 @@ import net.minecraft.network.codec.StreamCodec;
 
 import java.util.Objects;
 
-public record MatterComponent(int matter, int matterCapacity){
+public record MatterComponent(int matter) {
     public static final Codec<MatterComponent> CODEC = RecordCodecBuilder.create(builder -> builder.group(
-            Codec.INT.fieldOf("matter").forGetter(MatterComponent::matter),
-            Codec.INT.fieldOf("matterCapacity").forGetter(MatterComponent::matterCapacity)
+            Codec.INT.fieldOf("matter").forGetter(MatterComponent::matter)
     ).apply(builder, MatterComponent::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, MatterComponent> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT,
             MatterComponent::matter,
-            ByteBufCodecs.INT,
-            MatterComponent::matterCapacity,
             MatterComponent::new
     );
 
-    public static MatterComponent withCapacity(int capacity) {
-        return new MatterComponent(0, capacity);
+    public MatterComponent() {
+        this(0);
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof MatterComponent that)) return false;
-        return matter == that.matter;
+        if (!(o instanceof MatterComponent(int matter1))) return false;
+        return matter == matter1;
     }
 
     @Override
     public int hashCode() {
         return Objects.hashCode(matter);
-    }
-
-    @Override
-    public String toString() {
-        return "MatterComponent{" +
-                "matter=" + matter +
-                ", matterCapacity=" + matterCapacity +
-                '}';
     }
 }

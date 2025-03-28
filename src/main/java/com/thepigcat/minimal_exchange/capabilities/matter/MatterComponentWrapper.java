@@ -7,9 +7,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class MatterComponentWrapper implements IMatterStorage {
     private final ItemStack itemStack;
+    private final int capacity;
 
-    public MatterComponentWrapper(ItemStack itemStack) {
+    public MatterComponentWrapper(ItemStack itemStack, int capacity) {
         this.itemStack = itemStack;
+        this.capacity = capacity;
     }
 
     @Override
@@ -23,16 +25,15 @@ public class MatterComponentWrapper implements IMatterStorage {
 
     @Override
     public int getMatterCapacity() {
-        return getMatterComponent().matterCapacity();
+        return capacity;
     }
 
     @Override
     public void setMatter(int matter) {
-        itemStack.set(MEDataComponents.MATTER, new MatterComponent(matter, getMatterCapacity()));
+        itemStack.set(MEDataComponents.MATTER, new MatterComponent(matter));
     }
 
     @Override
     public void setMatterCapacity(int matterCapacity) {
-        itemStack.set(MEDataComponents.MATTER, new MatterComponent(getMatter(), matterCapacity));
     }
 }

@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-03T17:01:05.006986524	Item Models: minimal_exchange
+// 1.21.1	2025-03-28T16:36:38.092857387	Item Models: minimal_exchange
 2eb0ebd45615eb0dbd8b301ac491b7d258b5b822 assets/minimal_exchange/models/item/alchemy_bag.json
 3a9f81ca0cbc06c222beb771a1aea56394c298f6 assets/minimal_exchange/models/item/destruction_catalyst.json
 09e0b48f04239b0a73b417288ac7162e00b4d9e9 assets/minimal_exchange/models/item/destruction_catalyst_0.json
@@ -6,6 +6,7 @@
 77b714038046b798b177e9901eb094fb8a3f1cdc assets/minimal_exchange/models/item/destruction_catalyst_2.json
 036b36e76834b914b3d0f95986d0d76793f66e17 assets/minimal_exchange/models/item/destruction_catalyst_3.json
 567651e8dfa79bad583d821689f06ded517b940b assets/minimal_exchange/models/item/exchange_pylon.json
+8b2b82b0a5e5efb8ea24e8bf51fcddd820ee7903 assets/minimal_exchange/models/item/iron_band.json
 963a421316d15f28bd91e7f5d7be45e03d5ea64f assets/minimal_exchange/models/item/minium_shard.json
 070fac35c4113c55430e12c6e15f5a229ca480e6 assets/minimal_exchange/models/item/strong_covalence_dust.json
 c819785f1ae523a5d2038c42378789c2e7f4a624 assets/minimal_exchange/models/item/transmutation_stone.json

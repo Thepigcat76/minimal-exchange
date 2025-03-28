@@ -30,31 +30,4 @@ public abstract class MEAbstractContainerMenu extends AbstractContainerMenu {
             }
         }
     }
-
-    /**
-     * Implementation taken from {@link net.minecraft.world.inventory.ChestMenu#quickMoveStack(Player, int)}
-     */
-    @Override
-    public ItemStack quickMoveStack(Player player, int index) {
-        int containerRows = 6;
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(index);
-        if (slot != null && slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
-            if (index < containerRows * 9) {
-                if (!this.moveItemStackTo(itemstack1, containerRows * 9, this.slots.size(), true)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.moveItemStackTo(itemstack1, 0, containerRows * 9, false)) {
-                return ItemStack.EMPTY;
-            }
-            if (itemstack1.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-        }
-        return itemstack;
-    }
 }

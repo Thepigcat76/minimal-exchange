@@ -8,6 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
 public class ExchangePylonMenu extends MEAbstractContainerMenu {
@@ -37,5 +38,11 @@ public class ExchangePylonMenu extends MEAbstractContainerMenu {
     @Override
     public boolean stillValid(Player player) {
         return stillValid(containerLevelAccess, player, MEBlocks.EXCHANGE_PYLON.get());
+    }
+
+
+    @Override
+    public ItemStack quickMoveStack(Player player, int i) {
+        return ItemStack.EMPTY;
     }
 }

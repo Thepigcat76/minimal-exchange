@@ -27,6 +27,7 @@ public class MEItemModelProvider extends ItemModelProvider {
         basicItem(MEItems.WEAK_COVALENCE_DUST.get());
         basicItem(MEItems.STRONG_COVALENCE_DUST.get());
         basicItem(MEItems.MINIUM_SHARD.get());
+        basicItem(MEItems.IRON_BAND.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
         basicItem(MEItems.ALCHEMY_BAG.get())
                 .texture("layer1", modLoc("item/alchemy_bag_overlay"));
