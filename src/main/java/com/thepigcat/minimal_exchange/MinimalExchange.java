@@ -16,6 +16,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -92,6 +93,10 @@ public final class MinimalExchange {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, MEBlockEntityTypes.EXCHANGE_PYLON.get(), (be, ctx) -> be.getItemHandler());
 
         event.registerEntity(MECapabilities.MatterStorage.ENTITY, EntityType.PLAYER, (p, d) -> new MatterAttachmentWrapper(p, Integer.MAX_VALUE));
+    }
+
+    public static ResourceLocation rl(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 
     static {

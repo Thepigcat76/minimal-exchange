@@ -11,6 +11,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
+import java.util.List;
+
 public final class MEDataMaps {
     public static final DataMapType<Block, BlockTransmutationValue> BLOCK_TRANSMUTATIONS = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
@@ -21,12 +23,12 @@ public final class MEDataMaps {
             false
     ).build();
 
-    public static final DataMapType<Item, ItemTransmutationValue> ITEM_TRANSMUTATIONS = DataMapType.builder(
+    public static final DataMapType<Item, List<ItemTransmutationValue>> ITEM_TRANSMUTATIONS = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "transmutations"),
             Registries.ITEM,
-            ItemTransmutationValue.CODEC
+            ItemTransmutationValue.CODEC.listOf()
     ).synced(
-            ItemTransmutationValue.CODEC,
+            ItemTransmutationValue.CODEC.listOf(),
             false
     ).build();
 

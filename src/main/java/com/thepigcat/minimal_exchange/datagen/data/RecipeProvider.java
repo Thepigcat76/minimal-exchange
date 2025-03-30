@@ -24,10 +24,10 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
     protected void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MEItems.TRANSMUTATION_STONE)
                 .pattern("SSS")
-                .pattern("SDS")
+                .pattern("SIS")
                 .pattern("SSS")
                 .define('S', MEItems.MINIUM_SHARD.get())
-                .define('D', Tags.Items.GEMS_DIAMOND)
+                .define('I', MEItems.INERT_STONE.get())
                 .unlockedBy("has_shard", has(MEItems.MINIUM_SHARD.get()))
                 .save(recipeOutput);
 

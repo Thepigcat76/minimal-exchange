@@ -1,7 +1,7 @@
 package com.thepigcat.minimal_exchange.datagen;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
-import com.thepigcat.minimal_exchange.datagen.assets.EnUSLangProvider;
+import com.thepigcat.minimal_exchange.datagen.assets.MEEnUSLangProvider;
 import com.thepigcat.minimal_exchange.datagen.assets.MEBlockStateProvider;
 import com.thepigcat.minimal_exchange.datagen.assets.MEItemModelProvider;
 import com.thepigcat.minimal_exchange.datagen.data.DataMapProvider;
@@ -27,7 +27,7 @@ public class DataGatherer {
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         generator.addProvider(event.includeClient(), new MEItemModelProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new EnUSLangProvider(packOutput));
+        generator.addProvider(event.includeClient(), new MEEnUSLangProvider(packOutput));
         generator.addProvider(event.includeClient(), new MEBlockStateProvider(packOutput, existingFileHelper));
 
         TagProvider.createTagProviders(generator, packOutput, lookupProvider, existingFileHelper, event.includeServer());

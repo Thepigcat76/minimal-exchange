@@ -14,6 +14,9 @@ import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class ItemTransmutationRecipe extends CustomRecipe {
     public ItemTransmutationRecipe(CraftingBookCategory category) {
@@ -21,15 +24,24 @@ public class ItemTransmutationRecipe extends CustomRecipe {
     }
 
     private ItemTransmutationValue getTransmutation(CraftingInput craftingInput) {
+        int count = 0;
         ItemStack ingredient = ItemStack.EMPTY;
         for (int i = 0; i < craftingInput.size(); i++) {
             ItemStack item = craftingInput.getItem(i);
             if (!item.isEmpty() && !item.is(MEItems.TRANSMUTATION_STONE.get())) {
                 ingredient = item;
-                break;
+                count++;
             }
         }
-        return ingredient.getItemHolder().getData(MEDataMaps.ITEM_TRANSMUTATIONS);
+        List<ItemTransmutationValue> data = ingredient.getItemHolder().getData(MEDataMaps.ITEM_TRANSMUTATIONS);
+        if (data != null) {
+            for (ItemTransmutationValue transmutationValue : data) {
+                if (transmutationValue.inputCount() == count) {
+                    return transmutationValue;
+                }
+            }
+        }
+        return null;
     }
     
     @Override
@@ -53,10 +65,10 @@ public class ItemTransmutationRecipe extends CustomRecipe {
 
         if (transmutationStone.isEmpty() || ingredient.isEmpty()) return false;
 
-        ItemTransmutationValue transmutation = ingredient.getItemHolder().getData(MEDataMaps.ITEM_TRANSMUTATIONS);
-        return transmutation != null
-                && transmutation.inputCount() == ingredientCount
-                && transmutationStone.getCapability(MECapabilities.MatterStorage.ITEM).getMatter() >= transmutation.matterCost();
+        ItemTransmutationValue value = getTransmutation(craftingInput);
+        return value != null
+                && value.inputCount() == ingredientCount
+                && transmutationStone.getCapability(MECapabilities.MatterStorage.ITEM).getMatter() >= value.matterCost();
     }
 
     @Override

@@ -1,4 +1,4 @@
-// 1.21.1	2024-11-03T17:23:50.557447295	Recipes
+// 1.21.1	2025-03-29T10:38:24.586775008	Recipes
 e8bb8558016bce13f62d8f4b489bd85a9094fd76 data/minimal_exchange/advancement/recipes/misc/strong_covalence_dust.json
 d5a148cec9d9d12fd929d94d5069201fa8a1b256 data/minimal_exchange/advancement/recipes/misc/weak_covalence_dust.json
 ea8836b4d136ed93529c60c422cc7b67a530f9a3 data/minimal_exchange/advancement/recipes/tools/alchemy_bag.json
@@ -10,5 +10,5 @@ d066e1e7986897b3f5b20a1749afff28be65e7c8 data/minimal_exchange/advancement/recip
 7f10a2bcb9236f93f09b53410d73e1d8a27960ae data/minimal_exchange/recipe/exchange_pylon.json
 7d7365ae83b3768f5a9ce3f770e85dc4e75e0282 data/minimal_exchange/recipe/item_transmutation.json
 e6d8262fb5f3033d58154e5f95e746d2cf43b243 data/minimal_exchange/recipe/strong_covalence_dust.json
-24a3c67b658ad47a27a029a4ffdada0517c54a01 data/minimal_exchange/recipe/transmutation_stone.json
+db8f80cb4415fdcfca5189e0b3fa15fec355092d data/minimal_exchange/recipe/transmutation_stone.json
 2e32f04fc6c77743c80f868441203462013d87b4 data/minimal_exchange/recipe/weak_covalence_dust.json

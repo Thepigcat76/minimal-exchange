@@ -16,6 +16,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
+import java.util.function.Function;
 
 public class MEItemModelProvider extends ItemModelProvider {
     public MEItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -28,10 +29,18 @@ public class MEItemModelProvider extends ItemModelProvider {
         basicItem(MEItems.STRONG_COVALENCE_DUST.get());
         basicItem(MEItems.MINIUM_SHARD.get());
         basicItem(MEItems.IRON_BAND.get());
+        basicItem(MEItems.INERT_STONE.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
+        basicItem(MEItems.DIVINING_ROD.get());
+        basicItem(MEItems.ENHANCED_DIVING_ROD.get());
+        basicItem(MEItems.GROWTH_RING.get());
         basicItem(MEItems.ALCHEMY_BAG.get())
                 .texture("layer1", modLoc("item/alchemy_bag_overlay"));
         destructionCatalystItem(MEItems.DESTRUCTION_CATALYST.get());
+        overrideItemModel(4, basicItem(MEItems.DESTRUCTION_CATALYST.get(), extend(itemTexture(MEItems.DESTRUCTION_CATALYST.get()), "_0")), MinimalExchange.rl("matter"),
+                i -> basicItem(MEItems.DESTRUCTION_CATALYST.get(), "_" + i));
+        overrideItemModel(2, basicItem(MEItems.INERT_STONE.get()), MinimalExchange.rl("vibrating"),
+                i -> i == 1 ? basicItem(MEItems.INERT_STONE.get(), "_vibrating") : basicItem(MEItems.INERT_STONE.get()));
 
         blockItems();
     }
@@ -39,6 +48,16 @@ public class MEItemModelProvider extends ItemModelProvider {
     private void blockItems() {
         for (DeferredItem<BlockItem> blockItem : MEItems.BLOCK_ITEMS) {
             parentItemBlock(blockItem.get());
+        }
+    }
+
+    private void overrideItemModel(int variants, ItemModelBuilder defaultModel, ResourceLocation key, Function<Integer, ItemModelBuilder> overrideFunction) {
+        for (int i = 0; i < variants; i++) {
+            ItemModelBuilder model = overrideFunction.apply(i);
+            defaultModel.override()
+                    .model(model)
+                    .predicate(key, i)
+                    .end();
         }
     }
 
@@ -58,11 +77,19 @@ public class MEItemModelProvider extends ItemModelProvider {
         }
     }
 
-    public ItemModelBuilder basicItem(Item item, String suffix) {
+    public ItemModelBuilder basicItem(Item item, ResourceLocation texture, String suffix) {
         ResourceLocation location = BuiltInRegistries.ITEM.getKey(item);
         return getBuilder(location + suffix)
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(location.getNamespace(), "item/" + location.getPath() + suffix));
+                .texture("layer0", extend(texture, suffix));
+    }
+
+    public ItemModelBuilder basicItem(Item item, ResourceLocation texture) {
+        return basicItem(item, texture, "");
+    }
+
+    public ItemModelBuilder basicItem(Item item, String suffix) {
+        return basicItem(item, itemTexture(item), suffix);
     }
 
     public String name(Item item) {

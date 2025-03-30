@@ -1,11 +1,54 @@
 {
   "values": {
-    "minecraft:iron_ingot": {
-      "inputCount": 4,
-      "result": {
-        "count": 1,
-        "id": "minecraft:ender_pearl"
+    "minecraft:diamond": [
+      {
+        "inputCount": 1,
+        "result": {
+          "count": 8,
+          "id": "minecraft:gold_ingot"
+        }
       }
-    }
+    ],
+    "minecraft:ender_pearl": [
+      {
+        "inputCount": 1,
+        "result": {
+          "count": 4,
+          "id": "minecraft:iron_ingot"
+        }
+      }
+    ],
+    "minecraft:gold_ingot": [
+      {
+        "inputCount": 1,
+        "result": {
+          "count": 8,
+          "id": "minecraft:iron_ingot"
+        }
+      },
+      {
+        "inputCount": 8,
+        "result": {
+          "count": 1,
+          "id": "minecraft:diamond"
+        }
+      }
+    ],
+    "minecraft:iron_ingot": [
+      {
+        "inputCount": 4,
+        "result": {
+          "count": 1,
+          "id": "minecraft:ender_pearl"
+        }
+      },
+      {
+        "inputCount": 8,
+        "result": {
+          "count": 1,
+          "id": "minecraft:gold_ingot"
+        }
+      }
+    ]
   }
 }

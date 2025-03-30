@@ -1,5 +1,6 @@
 package com.thepigcat.minimal_exchange.events;
 
+import com.thepigcat.minimal_exchange.MEConfig;
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.registries.MEItems;
 import net.minecraft.core.BlockPos;
@@ -27,7 +28,7 @@ public final class CommonEvents {
         if (entity instanceof Monster
                 && !entity.level().isClientSide()
                 && event.getSource().getEntity() instanceof Player
-                && entity.level().random.nextInt(25) == 0) {
+                && entity.level().random.nextInt(1, 100) < MEConfig.miniumShardDropChance) {
             entity.spawnAtLocation(MEItems.MINIUM_SHARD, 1);
         }
     }

@@ -24,6 +24,30 @@
       "predicate": {
         "minimal_exchange:matter": 3.0
       }
+    },
+    {
+      "model": "minimal_exchange:item/destruction_catalyst_0",
+      "predicate": {
+        "minimal_exchange:matter": 0.0
+      }
+    },
+    {
+      "model": "minimal_exchange:item/destruction_catalyst_1",
+      "predicate": {
+        "minimal_exchange:matter": 1.0
+      }
+    },
+    {
+      "model": "minimal_exchange:item/destruction_catalyst_2",
+      "predicate": {
+        "minimal_exchange:matter": 2.0
+      }
+    },
+    {
+      "model": "minimal_exchange:item/destruction_catalyst_3",
+      "predicate": {
+        "minimal_exchange:matter": 3.0
+      }
     }
   ],
   "textures": {

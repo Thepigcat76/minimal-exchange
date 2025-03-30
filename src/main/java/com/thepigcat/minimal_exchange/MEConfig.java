@@ -12,6 +12,7 @@ public final class MEConfig {
 	private static final ModConfigSpec.IntValue TRANSMUTATION_STONE_MATTER_CAPACITY;
 	private static final ModConfigSpec.IntValue DESTRUCTION_CATALYST_MATTER_CAPACITY;
 	private static final ModConfigSpec.IntValue EXCHANGE_PYLON_MATTER_CAPACITY;
+	private static final ModConfigSpec.IntValue MINIUM_SHARD_DROP_CHANCE;
 
 	static final ModConfigSpec SPEC;
 
@@ -36,17 +37,29 @@ public final class MEConfig {
 			BUILDER.pop();
 		}
 
+		{
+			BUILDER.push("misc");
+
+			MINIUM_SHARD_DROP_CHANCE = BUILDER
+					.comment("The chance for mobs to drop a minium shard. Set to 0 to disable minium shard dropping")
+					.defineInRange("minium_shard_drop_chance", 5, 0, 100);
+
+			BUILDER.pop();
+		}
+
 		SPEC = BUILDER.build();
 	}
 
 	public static int transmutationStoneMatterCapacity;
 	public static int destructionCatalystMatterCapacity;
 	public static int exchangePylonMatterCapacity;
+	public static int miniumShardDropChance;
 
 	@SubscribeEvent
 	private static void onLoad(ModConfigEvent event) {
 		transmutationStoneMatterCapacity = TRANSMUTATION_STONE_MATTER_CAPACITY.get();
 		destructionCatalystMatterCapacity = DESTRUCTION_CATALYST_MATTER_CAPACITY.get();
 		exchangePylonMatterCapacity = EXCHANGE_PYLON_MATTER_CAPACITY.get();
+		miniumShardDropChance = MINIUM_SHARD_DROP_CHANCE.get();
 	}
 }

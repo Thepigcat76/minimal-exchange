@@ -1,0 +1,20 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "minimal_exchange:item/inert_stone",
+      "predicate": {
+        "minimal_exchange:vibrating": 0.0
+      }
+    },
+    {
+      "model": "minimal_exchange:item/inert_stone_vibrating",
+      "predicate": {
+        "minimal_exchange:vibrating": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "minimal_exchange:item/inert_stone"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "MINIMAL_EXCHANGE_DIVINING_ROD",
+      "constructor": "(ZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/thepigcat/minimal_exchange/client/MEArmPose",
+        "field": "DIVINING_ROD"
+      }
+    }
+  ]
+}
