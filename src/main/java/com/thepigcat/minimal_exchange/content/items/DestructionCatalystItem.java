@@ -76,7 +76,9 @@ public class DestructionCatalystItem extends SimpleMatterItem {
                 }
             }
 
-            matterStorage.extractMatter(blocks, false);
+            if (!context.getPlayer().hasInfiniteMaterials()) {
+                matterStorage.extractMatter(blocks, false);
+            }
             return InteractionResult.SUCCESS;
         }
 

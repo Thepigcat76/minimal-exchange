@@ -5,23 +5,27 @@ import com.thepigcat.minimal_exchange.data.maps.BlockTransmutationValue;
 import com.thepigcat.minimal_exchange.data.maps.EntityTransmutationValue;
 import com.thepigcat.minimal_exchange.data.maps.ItemTransmutationValue;
 import com.thepigcat.minimal_exchange.util.RegistryUtils;
+import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class DataMapProvider extends net.neoforged.neoforge.common.data.DataMapProvider {
     public static final Map<ResourceKey<Item>, List<ItemTransmutationValue>> ITEM_TRANSMUTATIONS = new HashMap<>();
@@ -43,6 +47,11 @@ public class DataMapProvider extends net.neoforged.neoforge.common.data.DataMapP
     private void entityTransmutation(EntityType<?> input, EntityType<? extends LivingEntity> output, int matterCost) {
         builder(MEDataMaps.ENTITY_TRANSMUTATIONS)
                 .add(RegistryUtils.resourceKey(BuiltInRegistries.ENTITY_TYPE, input), new EntityTransmutationValue(output, matterCost), false);
+    }
+
+    private void matter(ItemLike item, int matter) {
+        builder(MEDataMaps.MATTER)
+                .add(RegistryUtils.resourceKey(BuiltInRegistries.ITEM, item.asItem()), matter, false);
     }
 
     @Override
@@ -68,6 +77,13 @@ public class DataMapProvider extends net.neoforged.neoforge.common.data.DataMapP
 
         entityTransmutation(EntityType.SLIME, EntityType.MAGMA_CUBE, 1);
         entityTransmutation(EntityType.MAGMA_CUBE, EntityType.SLIME, 1);
+
+        matter(Items.OAK_LOG, 64);
+        matter(Items.ACACIA_LOG, 64);
+        matter(Items.BIRCH_LOG, 64);
+        matter(Items.CHERRY_LOG, 64);
+        matter(Items.DARK_OAK_LOG, 64);
+        matter(Items.JUNGLE_LOG, 64);
 
         for (Map.Entry<ResourceKey<Item>, List<ItemTransmutationValue>> entry : ITEM_TRANSMUTATIONS.entrySet()) {
             builder(MEDataMaps.ITEM_TRANSMUTATIONS)

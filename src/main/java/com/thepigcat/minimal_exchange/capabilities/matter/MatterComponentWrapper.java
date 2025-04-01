@@ -16,11 +16,7 @@ public class MatterComponentWrapper implements IMatterStorage {
 
     @Override
     public int getMatter() {
-        return getMatterComponent().matter();
-    }
-
-    private @Nullable MatterComponent getMatterComponent() {
-        return itemStack.get(MEDataComponents.MATTER);
+        return itemStack.getOrDefault(MEDataComponents.MATTER, 0);
     }
 
     @Override
@@ -30,7 +26,7 @@ public class MatterComponentWrapper implements IMatterStorage {
 
     @Override
     public void setMatter(int matter) {
-        itemStack.set(MEDataComponents.MATTER, new MatterComponent(matter));
+        itemStack.set(MEDataComponents.MATTER, matter);
     }
 
     @Override

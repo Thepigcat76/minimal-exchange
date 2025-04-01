@@ -1,5 +1,6 @@
 package com.thepigcat.minimal_exchange.data;
 
+import com.mojang.serialization.Codec;
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.data.maps.BlockTransmutationValue;
 import com.thepigcat.minimal_exchange.data.maps.EntityTransmutationValue;
@@ -38,6 +39,15 @@ public final class MEDataMaps {
             EntityTransmutationValue.CODEC
     ).synced(
             EntityTransmutationValue.CODEC,
+            false
+    ).build();
+
+    public static final DataMapType<Item, Integer> MATTER = DataMapType.builder(
+            ResourceLocation.fromNamespaceAndPath(MinimalExchange.MODID, "matter"),
+            Registries.ITEM,
+            Codec.INT
+    ).synced(
+            Codec.INT,
             false
     ).build();
 }

@@ -1,6 +1,30 @@
 {
   "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minimal_exchange:item/divining_rod"
+  "base": {
+    "parent": "minecraft:item/generated",
+    "textures": {
+      "layer0": "minimal_exchange:item/divining_rod_handheld"
+    }
+  },
+  "loader": "neoforge:separate_transforms",
+  "perspectives": {
+    "fixed": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "minimal_exchange:item/divining_rod_gui"
+      }
+    },
+    "ground": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "minimal_exchange:item/divining_rod_gui"
+      }
+    },
+    "gui": {
+      "parent": "minecraft:item/generated",
+      "textures": {
+        "layer0": "minimal_exchange:item/divining_rod_gui"
+      }
+    }
   }
 }

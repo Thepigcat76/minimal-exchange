@@ -10,6 +10,9 @@ import com.thepigcat.minimal_exchange.data.MEAttachmentTypes;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
 import com.thepigcat.minimal_exchange.data.MEDataMaps;
 import com.thepigcat.minimal_exchange.data.components.MatterComponent;
+import com.thepigcat.minimal_exchange.matter.ItemMatterValues;
+import com.thepigcat.minimal_exchange.matter.MatterHelper;
+import com.thepigcat.minimal_exchange.networking.SyncItemMatterValuesPayload;
 import com.thepigcat.minimal_exchange.registries.*;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.component.DataComponents;
@@ -31,9 +34,15 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.NeoForgeMod;
+import net.neoforged.neoforge.event.OnDatapackSyncEvent;
 import net.neoforged.neoforge.items.ComponentItemHandler;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import org.slf4j.Logger;
@@ -66,12 +75,31 @@ public final class MinimalExchange {
 
         modEventBus.addListener(this::registerDataMaps);
         modEventBus.addListener(this::registerCapabilities);
+        modEventBus.addListener(this::registerPayloads);
+        modEventBus.addListener(this::onCommonSetup);
+
+        NeoForge.EVENT_BUS.addListener(this::onDatapackReload);
+    }
+
+    private void onCommonSetup(FMLCommonSetupEvent event) {
+        ItemMatterValues.loadItemMatterValues();
+    }
+
+    private void onDatapackReload(OnDatapackSyncEvent event) {
+        MatterHelper.calculateMatter(event.getPlayerList().getServer().overworld());
     }
 
     private void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(MEDataMaps.BLOCK_TRANSMUTATIONS);
         event.register(MEDataMaps.ITEM_TRANSMUTATIONS);
         event.register(MEDataMaps.ENTITY_TRANSMUTATIONS);
+
+        event.register(MEDataMaps.MATTER);
+    }
+
+    private void registerPayloads(RegisterPayloadHandlersEvent event) {
+        PayloadRegistrar registrar = event.registrar(MODID);
+        registrar.playToClient(SyncItemMatterValuesPayload.TYPE, SyncItemMatterValuesPayload.STREAM_CODEC, SyncItemMatterValuesPayload::handle);
     }
 
     private void registerCapabilities(RegisterCapabilitiesEvent event) {
@@ -79,8 +107,8 @@ public final class MinimalExchange {
             if (item instanceof IMatterItem matterItem) {
                 event.registerItem(MECapabilities.MatterStorage.ITEM, (itemstack, ctx) -> {
                     if (itemstack.has(MEDataComponents.MATTER)) {
-                        MatterComponent matterComponent = itemstack.get(MEDataComponents.MATTER);
-                        itemstack.set(MEDataComponents.MATTER, new MatterComponent(matterComponent.matter()));
+                        int matter = itemstack.getOrDefault(MEDataComponents.MATTER, 0);
+                        itemstack.set(MEDataComponents.MATTER, matter);
                         return new MatterComponentWrapper(itemstack, matterItem.getMatterCapacity(itemstack));
                     }
                     throw new RuntimeException("Item that implement IMatterItem interface needs the MATTER DataComponent, affected item: " + item);
@@ -108,9 +136,9 @@ public final class MinimalExchange {
                         if (item.asItem() instanceof IMatterItem matterItem) {
                             ItemStack itemStack = new ItemStack(item);
                             int matterCapacity = matterItem.getMatterCapacity(itemStack);
-                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(matterCapacity));
+                            itemStack.set(MEDataComponents.MATTER, matterCapacity);
                             output.accept(itemStack.copy());
-                            itemStack.set(MEDataComponents.MATTER, new MatterComponent(0));
+                            itemStack.set(MEDataComponents.MATTER, 0);
                             output.accept(itemStack.copy());
                         } else {
                             output.accept(item);

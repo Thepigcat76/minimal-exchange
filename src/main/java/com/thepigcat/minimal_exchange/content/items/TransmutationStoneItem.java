@@ -46,7 +46,9 @@ public class TransmutationStoneItem extends SimpleMatterItem {
             if (matterStorage.getMatter() >= matterCost) {
                 level.setBlockAndUpdate(context.getClickedPos(), transmutation.result().defaultBlockState());
                 level.playSound(null, clickedPos, MESoundEvents.TRANSMUTE.get(), SoundSource.PLAYERS, 0.8f, 1);
-                matterStorage.extractMatter(matterCost, false);
+                if (!context.getPlayer().hasInfiniteMaterials()) {
+                    matterStorage.extractMatter(matterCost, false);
+                }
                 return InteractionResult.SUCCESS;
             }
         }
@@ -67,7 +69,9 @@ public class TransmutationStoneItem extends SimpleMatterItem {
                     if (!level.isClientSide()) {
                         targetMob.convertTo((EntityType<? extends Mob>) transmutatedEntityType, true);
                         target.level().playSound(null, target.blockPosition(), MESoundEvents.TRANSMUTE.get(), SoundSource.PLAYERS, 0.8f, 1);
-                        matterStorage.extractMatter(matterCost, false);
+                        if (!player.hasInfiniteMaterials()) {
+                            matterStorage.extractMatter(matterCost, false);
+                        }
                     }
                     return InteractionResult.SUCCESS;
                 }

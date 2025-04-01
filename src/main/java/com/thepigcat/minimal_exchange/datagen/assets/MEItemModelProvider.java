@@ -1,16 +1,20 @@
 package com.thepigcat.minimal_exchange.datagen.assets;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
+import com.thepigcat.minimal_exchange.content.items.DiviningRodItem;
 import com.thepigcat.minimal_exchange.registries.MEItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.client.model.generators.ModelProvider;
+import net.neoforged.neoforge.client.model.generators.loaders.SeparateTransformsModelBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredItem;
 import org.jetbrains.annotations.NotNull;
@@ -31,8 +35,7 @@ public class MEItemModelProvider extends ItemModelProvider {
         basicItem(MEItems.IRON_BAND.get());
         basicItem(MEItems.INERT_STONE.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
-        basicItem(MEItems.DIVINING_ROD.get());
-        basicItem(MEItems.ENHANCED_DIVING_ROD.get());
+        basicItem(MEItems.DESTRUCTIVE_AURA_TALISMAN.get());
         basicItem(MEItems.GROWTH_RING.get());
         basicItem(MEItems.ALCHEMY_BAG.get())
                 .texture("layer1", modLoc("item/alchemy_bag_overlay"));
@@ -42,7 +45,22 @@ public class MEItemModelProvider extends ItemModelProvider {
         overrideItemModel(2, basicItem(MEItems.INERT_STONE.get()), MinimalExchange.rl("vibrating"),
                 i -> i == 1 ? basicItem(MEItems.INERT_STONE.get(), "_vibrating") : basicItem(MEItems.INERT_STONE.get()));
 
+        diviningRodItem(MEItems.DIVINING_ROD);
+        diviningRodItem(MEItems.ENHANCED_DIVING_ROD);
+
         blockItems();
+    }
+
+    private void diviningRodItem(ItemLike item) {
+        ItemModelBuilder diviningRodModelHandheld = basicItem(item.asItem(), "_handheld");
+        ItemModelBuilder diviningRodModel = basicItem(item.asItem(), "_gui");
+        getBuilder(name(item.asItem()))
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .customLoader(SeparateTransformsModelBuilder::begin)
+                .base(diviningRodModelHandheld)
+                .perspective(ItemDisplayContext.GUI, diviningRodModel)
+                .perspective(ItemDisplayContext.FIXED, diviningRodModel)
+                .perspective(ItemDisplayContext.GROUND, diviningRodModel);
     }
 
     private void blockItems() {

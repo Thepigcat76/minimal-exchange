@@ -36,22 +36,26 @@ public final class MEItems {
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<TransmutationStoneItem> TRANSMUTATION_STONE = register("transmutation_stone",
             () -> new TransmutationStoneItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, new MatterComponent())
+                    .component(MEDataComponents.MATTER, 0)
                     .stacksTo(1)));
     public static final DeferredItem<DiviningRodItem> DIVINING_ROD = register("divining_rod",
             () -> new DiviningRodItem(new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<DiviningRodItem> ENHANCED_DIVING_ROD = register("enhanced_divining_rod",
-            () -> new DiviningRodItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<EnhancedDiviningRodItem> ENHANCED_DIVING_ROD = register("enhanced_divining_rod",
+            () -> new EnhancedDiviningRodItem(new Item.Properties()
+                    .component(MEDataComponents.MATTER, 0)
+                    .stacksTo(1)));
     public static final DeferredItem<AlchemyBagItem> ALCHEMY_BAG = register("alchemy_bag",
             () -> new AlchemyBagItem(new Item.Properties()
                     .component(DataComponents.DYED_COLOR, new DyedItemColor(FastColor.ARGB32.color(255, 255, 255), false))
                     .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
                     .stacksTo(1)), false);
+    public static final DeferredItem<Item> DESTRUCTIVE_AURA_TALISMAN = register("destructive_aura_talisman",
+            () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<Item> GROWTH_RING = register("growth_ring",
             () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<DestructionCatalystItem> DESTRUCTION_CATALYST = register("destruction_catalyst",
             () -> new DestructionCatalystItem(new Item.Properties()
-                    .component(MEDataComponents.MATTER, new MatterComponent())
+                    .component(MEDataComponents.MATTER, 0)
                     .stacksTo(1)));
 
     private static <T extends Item> DeferredItem<T> register(String name, Supplier<T> itemSupplier, boolean addToTab) {

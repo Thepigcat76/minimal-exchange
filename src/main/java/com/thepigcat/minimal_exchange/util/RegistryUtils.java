@@ -1,8 +1,12 @@
 package com.thepigcat.minimal_exchange.util;
 
 import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
@@ -26,5 +30,9 @@ public final class RegistryUtils {
 	 */
 	public static <T> Codec<T> registryCodec(Registry<T> registry) {
 		return ResourceLocation.CODEC.xmap(registry::get, registry::getKey);
+	}
+
+	public static <T> StreamCodec<ByteBuf, T> registryStreamCodec(Registry<T> registry) {
+		return ResourceLocation.STREAM_CODEC.map(registry::get, registry::getKey);
 	}
 }
