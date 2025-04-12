@@ -1,7 +1,6 @@
 package com.thepigcat.minimal_exchange.datagen.assets;
 
 import com.thepigcat.minimal_exchange.MinimalExchange;
-import com.thepigcat.minimal_exchange.content.items.DiviningRodItem;
 import com.thepigcat.minimal_exchange.registries.MEItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -33,10 +32,11 @@ public class MEItemModelProvider extends ItemModelProvider {
         basicItem(MEItems.STRONG_COVALENCE_DUST.get());
         basicItem(MEItems.MINIUM_SHARD.get());
         basicItem(MEItems.IRON_BAND.get());
+        basicItem(MEItems.ALCHEMICAL_ASHES.get());
         basicItem(MEItems.INERT_STONE.get());
         basicItem(MEItems.TRANSMUTATION_STONE.get());
         basicItem(MEItems.DESTRUCTIVE_AURA_TALISMAN.get());
-        basicItem(MEItems.GROWTH_RING.get());
+        basicItem(MEItems.GROWTH_BAND.get());
         basicItem(MEItems.ALCHEMY_BAG.get())
                 .texture("layer1", modLoc("item/alchemy_bag_overlay"));
         destructionCatalystItem(MEItems.DESTRUCTION_CATALYST.get());

@@ -1,2 +1,4 @@
-// 1.21.1	2024-11-03T14:35:32.217261847	Block States: minimal_exchange
+// 1.21.1	2025-04-12T16:17:56.023734145	Block States: minimal_exchange
+bac77f1da3a0f4ed60e13763927612265167dd6c assets/minimal_exchange/blockstates/alchemical_stone.json
 582b9222b12125f339af68efbb83e3bea1d6ec8c assets/minimal_exchange/blockstates/exchange_pylon.json
+6cb80b38c1b15d4b83dca0bc5da8bf17c509f80d assets/minimal_exchange/models/block/alchemical_stone.json

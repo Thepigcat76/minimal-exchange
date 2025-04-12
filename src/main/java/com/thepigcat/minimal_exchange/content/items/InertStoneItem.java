@@ -20,7 +20,7 @@ public class InertStoneItem extends Item {
     }
 
     public static float isVibrating(Level level) {
-        return level.random.nextInt(0, 22) == 0 ? 1f : 0f;
+        return level.random.nextInt(0, 42) == 0 ? 1f : 0f;
     }
 
 }

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "A": {
+      "item": "minimal_exchange:alchemical_ashes"
+    },
+    "S": {
+      "tag": "c:stones"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SAS",
+    "SSS"
+  ],
+  "result": {
+    "count": 8,
+    "id": "minimal_exchange:alchemical_stone"
+  }
+}

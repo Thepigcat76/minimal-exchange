@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "minimal_exchange:block/alchemical_stone"
+  }
+}

@@ -3,7 +3,6 @@ package com.thepigcat.minimal_exchange.registries;
 import com.thepigcat.minimal_exchange.MinimalExchange;
 import com.thepigcat.minimal_exchange.content.items.*;
 import com.thepigcat.minimal_exchange.data.MEDataComponents;
-import com.thepigcat.minimal_exchange.data.components.MatterComponent;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.BlockItem;
@@ -34,6 +33,8 @@ public final class MEItems {
             () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> STRONG_COVALENCE_DUST = register("strong_covalence_dust",
             () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> ALCHEMICAL_ASHES = register("alchemical_ashes",
+            () -> new Item(new Item.Properties()));
     public static final DeferredItem<TransmutationStoneItem> TRANSMUTATION_STONE = register("transmutation_stone",
             () -> new TransmutationStoneItem(new Item.Properties()
                     .component(MEDataComponents.MATTER, 0)
@@ -51,7 +52,7 @@ public final class MEItems {
                     .stacksTo(1)), false);
     public static final DeferredItem<Item> DESTRUCTIVE_AURA_TALISMAN = register("destructive_aura_talisman",
             () -> new Item(new Item.Properties().stacksTo(1)));
-    public static final DeferredItem<Item> GROWTH_RING = register("growth_ring",
+    public static final DeferredItem<Item> GROWTH_BAND = register("growth_band",
             () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<DestructionCatalystItem> DESTRUCTION_CATALYST = register("destruction_catalyst",
             () -> new DestructionCatalystItem(new Item.Properties()

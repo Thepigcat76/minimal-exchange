@@ -7,6 +7,7 @@ import com.thepigcat.minimal_exchange.client.blockentities.ExchangePylonBERender
 import com.thepigcat.minimal_exchange.client.screen.AlchemyBagScreen;
 import com.thepigcat.minimal_exchange.client.screen.ExchangePylonScreen;
 import com.thepigcat.minimal_exchange.content.items.DestructionCatalystItem;
+import com.thepigcat.minimal_exchange.content.items.DiviningRodItem;
 import com.thepigcat.minimal_exchange.content.items.InertStoneItem;
 import com.thepigcat.minimal_exchange.matter.MatterManager;
 import com.thepigcat.minimal_exchange.registries.MEBlockEntityTypes;
@@ -36,6 +37,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
+import net.neoforged.neoforge.client.event.RenderHandEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -57,6 +59,7 @@ public final class MinimalExchangeClient {
         modEventBus.addListener(this::registerClientExtensions);
 
         NeoForge.EVENT_BUS.addListener(this::addMatterTooltip);
+        NeoForge.EVENT_BUS.addListener(this::renderOffHand);
 
         modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
     }
@@ -84,6 +87,12 @@ public final class MinimalExchangeClient {
         }
     }
 
+    private void renderOffHand(RenderHandEvent event) {
+//        if (event.getHand() == InteractionHand.MAIN_HAND && Minecraft.getInstance().player.getItemInHand(InteractionHand.OFF_HAND).getItem() instanceof DiviningRodItem) {
+//            event.setCanceled(true);
+//        }
+    }
+
     private void registerClientExtensions(RegisterClientExtensionsEvent event) {
         event.registerItem(new IClientItemExtensions() {
             @Override
@@ -93,37 +102,39 @@ public final class MinimalExchangeClient {
 
             @Override
             public boolean applyForgeHandTransform(PoseStack poseStack, LocalPlayer player, HumanoidArm arm, ItemStack itemInHand, float partialTick, float equipProcess, float swingProcess) {
-                float f7;
-                if (player.isUsingItem()) {
-                    float f = (float) (player.getUseItemRemainingTicks() % 200);
-                    float f1 = f - partialTick + 1.0F;
-                    float f2 = 1.0F - f1 / 75F;
-                    f7 = 0F + 15.0F * Mth.cos(f2 * 2.0F * (float) Math.PI);
-                } else {
-                    f7 = 0;
+                if (arm == player.getMainArm() && player.getMainHandItem() == itemInHand) {
+                    float f7;
+                    if (player.isUsingItem()) {
+                        float f = (float) (player.getUseItemRemainingTicks() % 200);
+                        float f1 = f - partialTick + 1.0F;
+                        float f2 = 1.0F - f1 / 75F;
+                        f7 = 0F + 15.0F * Mth.cos(f2 * 2.0F * (float) Math.PI);
+                    } else {
+                        f7 = 0;
+                    }
+                    if (arm == HumanoidArm.RIGHT) {
+                        poseStack.translate(-0.85, -0.25, -1.3);
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(270));
+                        poseStack.mulPose(Axis.YP.rotationDegrees(5f));
+
+                        poseStack.translate(0, 0, 0.5);
+                        poseStack.mulPose(Axis.YP.rotationDegrees(f7));
+                        poseStack.translate(0, 0, -0.5);
+
+                        poseStack.mulPose(Axis.XP.rotationDegrees(65f));
+                    } else {
+                        poseStack.translate(-1.05, -2.275, -3.25);
+                        poseStack.mulPose(Axis.ZP.rotationDegrees(90));
+                        poseStack.mulPose(Axis.YP.rotationDegrees(175f));
+
+                        poseStack.translate(-2, 0, -2);
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-f7));
+                        poseStack.translate(2, 0, 2);
+
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-25f));
+                    }
+                    poseStack.scale(1.75f, 1.75f, 1.75f);
                 }
-                if (arm == HumanoidArm.RIGHT) {
-                    poseStack.translate(-0.85, -0.25, -1.3);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(270));
-                    poseStack.mulPose(Axis.YP.rotationDegrees(5f));
-
-                    poseStack.translate(0, 0, 0.5);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(f7));
-                    poseStack.translate(0, 0, -0.5);
-
-                    poseStack.mulPose(Axis.XP.rotationDegrees(65f));
-                } else {
-                    poseStack.translate(-1.05, -2.275, -3.25);
-                    poseStack.mulPose(Axis.ZP.rotationDegrees(90));
-                    poseStack.mulPose(Axis.YP.rotationDegrees(175f));
-
-                    poseStack.translate(-2, 0, -2);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(-f7));
-                    poseStack.translate(2, 0, 2);
-
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-25f));
-                }
-                poseStack.scale(1.75f, 1.75f, 1.75f);
                 return IClientItemExtensions.super.applyForgeHandTransform(poseStack, player, arm, itemInHand, partialTick, equipProcess, swingProcess);
             }
         }, MEItems.DIVINING_ROD, MEItems.ENHANCED_DIVING_ROD);

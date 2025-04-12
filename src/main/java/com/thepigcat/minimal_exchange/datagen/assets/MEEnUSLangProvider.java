@@ -15,6 +15,7 @@ public class MEEnUSLangProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(MEItems.MINIUM_SHARD, "Minium Shard");
         addItem(MEItems.IRON_BAND, "Iron Band");
+        addItem(MEItems.ALCHEMICAL_ASHES, "Alchemical Ashes");
         addItem(MEItems.DIVINING_ROD, "Divining Rod");
         addItem(MEItems.ENHANCED_DIVING_ROD, "Enhanced Divining Rod");
         addItem(MEItems.INERT_STONE, "Inert Stone");

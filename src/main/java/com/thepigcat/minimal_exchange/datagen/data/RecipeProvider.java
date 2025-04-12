@@ -42,7 +42,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .unlockedBy("has_shard", has(MEItems.MINIUM_SHARD.get()))
                 .save(recipeOutput);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, MEBlocks.EXCHANGE_PYLON)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, MEBlocks.EXCHANGE_PYLON)
                 .pattern(" O ")
                 .pattern(" S ")
                 .pattern("OWO")
@@ -50,6 +50,15 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .define('W', MEItems.WEAK_COVALENCE_DUST.get())
                 .define('O', Tags.Items.OBSIDIANS)
                 .unlockedBy("has_obsidian", has(Tags.Items.OBSIDIANS))
+                .save(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, MEBlocks.ALCHEMICAL_STONE, 8)
+                .pattern("SSS")
+                .pattern("SAS")
+                .pattern("SSS")
+                .define('S', Tags.Items.STONES)
+                .define('A', MEItems.ALCHEMICAL_ASHES.get())
+                .unlockedBy("has_alchemical_ashes", has(MEItems.ALCHEMICAL_ASHES.get()))
                 .save(recipeOutput);
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, MEItems.WEAK_COVALENCE_DUST)

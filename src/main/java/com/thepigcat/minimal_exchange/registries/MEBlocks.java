@@ -17,6 +17,9 @@ public final class MEBlocks {
     public static final DeferredBlock<ExchangePylonBlock> EXCHANGE_PYLON = registerBlock("exchange_pylon",
             () -> new ExchangePylonBlock(BlockBehaviour.Properties.of()));
 
+    public static final DeferredBlock<Block> ALCHEMICAL_STONE = registerBlock("alchemical_stone",
+            () -> new Block(BlockBehaviour.Properties.of()));
+
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> blockSup) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, blockSup);
         DeferredItem<BlockItem> blockItem = MEItems.ITEMS.registerSimpleBlockItem(toReturn);

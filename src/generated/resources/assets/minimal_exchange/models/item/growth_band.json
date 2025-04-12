@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "minimal_exchange:item/growth_ring"
+    "layer0": "minimal_exchange:item/growth_band"
   }
 }

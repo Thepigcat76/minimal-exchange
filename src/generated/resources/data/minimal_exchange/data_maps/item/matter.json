@@ -1,0 +1,10 @@
+{
+  "values": {
+    "minecraft:acacia_log": 64,
+    "minecraft:birch_log": 64,
+    "minecraft:cherry_log": 64,
+    "minecraft:dark_oak_log": 64,
+    "minecraft:jungle_log": 64,
+    "minecraft:oak_log": 64
+  }
+}

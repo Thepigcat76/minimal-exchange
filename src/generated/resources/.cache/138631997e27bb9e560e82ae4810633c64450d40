@@ -1,4 +1,6 @@
-// 1.21.1	2025-03-31T20:33:56.194365976	Item Models: minimal_exchange
+// 1.21.1	2025-04-12T16:17:56.021172032	Item Models: minimal_exchange
+6045ccc607c93116f9af673133d7b189368ac739 assets/minimal_exchange/models/item/alchemical_ashes.json
+a990bbc5c10f90a4013c7d76ab3f18a829964763 assets/minimal_exchange/models/item/alchemical_stone.json
 2eb0ebd45615eb0dbd8b301ac491b7d258b5b822 assets/minimal_exchange/models/item/alchemy_bag.json
 6e089555841727a61c5a367a761102f9b6137be8 assets/minimal_exchange/models/item/destruction_catalyst.json
 09e0b48f04239b0a73b417288ac7162e00b4d9e9 assets/minimal_exchange/models/item/destruction_catalyst_0.json
@@ -13,7 +15,7 @@ b51205ac4f0bba2e5f8ba27e74b9ef61be901c61 assets/minimal_exchange/models/item/enh
 9e0461f283e53f01f00446726154ba29f851266c assets/minimal_exchange/models/item/enhanced_divining_rod_gui.json
 08f268d3838d5fc4523571128c1870fe470d3030 assets/minimal_exchange/models/item/enhanced_divining_rod_handheld.json
 567651e8dfa79bad583d821689f06ded517b940b assets/minimal_exchange/models/item/exchange_pylon.json
-fd56fb9c3728772aacac6c06a1edba2bd9f94fc8 assets/minimal_exchange/models/item/growth_ring.json
+bb82cd47ade1443400401363a122901affcf970b assets/minimal_exchange/models/item/growth_band.json
 f2bfd0566f6d2274ce141b0d8ebb23194494726f assets/minimal_exchange/models/item/inert_stone.json
 1c2242bcc8e541e751c9c34b56f47f63a4839fed assets/minimal_exchange/models/item/inert_stone_vibrating.json
 8b2b82b0a5e5efb8ea24e8bf51fcddd820ee7903 assets/minimal_exchange/models/item/iron_band.json

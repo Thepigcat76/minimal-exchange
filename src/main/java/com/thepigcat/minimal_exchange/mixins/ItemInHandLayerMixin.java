@@ -19,14 +19,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ItemInHandLayer.class)
 public abstract class ItemInHandLayerMixin {
-    @Inject(method = "renderArmWithItem", at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
-            ordinal = 0
-    ))
+    @Inject(method = "renderArmWithItem",
+            at = @At(
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/renderer/ItemInHandRenderer;renderItem(Lnet/minecraft/world/entity/LivingEntity;Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemDisplayContext;ZLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
+                    ordinal = 0
+            )
+    )
     private void minimal_exchange$renderArmWithItem(LivingEntity livingEntity, ItemStack itemStack, ItemDisplayContext displayContext, HumanoidArm arm, PoseStack poseStack, MultiBufferSource buffer, int packedLight, CallbackInfo ci) {
-        if (itemStack.getItem() instanceof DiviningRodItem) {
-            ClientUtils.renderDiviningRodInHand(livingEntity, itemStack, displayContext, arm, poseStack, buffer, packedLight);
+        if (arm == livingEntity.getMainArm()) {
+
+            if (itemStack.getItem() instanceof DiviningRodItem) {
+                ClientUtils.renderDiviningRodInHand(livingEntity, itemStack, displayContext, arm, poseStack, buffer, packedLight);
+            }
         }
     }
 }
