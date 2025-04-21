@@ -1,0 +1,7 @@
+{
+  "render_type": "cutout",
+  "parent": "minecraft:block/template_fire_side_alt",
+  "textures": {
+    "fire": "minimal_exchange:block/alchemical_fire_1"
+  }
+}

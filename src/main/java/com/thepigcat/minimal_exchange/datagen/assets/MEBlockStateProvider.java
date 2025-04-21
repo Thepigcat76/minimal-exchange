@@ -20,6 +20,7 @@ public class MEBlockStateProvider extends BlockStateProvider {
     protected void registerStatesAndModels() {
         simpleBlock(MEBlocks.EXCHANGE_PYLON.get(), new ModelFile.UncheckedModelFile(modLoc("block/exchange_pylon")));
         simpleBlock(MEBlocks.ALCHEMICAL_STONE.get());
+
     }
 
     private ResourceLocation key(Block block) {

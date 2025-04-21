@@ -3,6 +3,7 @@
   "package": "com.thepigcat.minimal_exchange.mixins",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "FireBlockMixin"
   ],
   "client": [
     "ItemInHandLayerMixin",
